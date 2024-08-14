@@ -1,0 +1,315 @@
+{% extends 'layouts/layout.html' %}
+
+{% block content %}
+  <!-- Modal -->
+ 
+
+  <div id="modalPublicar" class="modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: black;">Publicar</h5>
+                <button type="button" onclick="window.location.href='/home'" class="btn-close" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenido del modal -->
+                <div class="description-block" id="description-block" style="max-width: 100%;">
+                    <textarea id="file-description" style="max-width: 100%;" rows="3" placeholder="Ingrese su descripción aquí"></textarea>
+                    <div>
+                        <button id="color-picker-btn" class="btn btn-primary">Seleccionar Color</button>
+                        <div id="selected-color"></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="preview-image-container"style="max-width: 100%;">
+                        <img id="preview-image" src="#" alt="Vista previa de la imagen">
+                        <button class="close-button" onclick="closePreview()" style="display: none;">X</button>
+  
+                        <form id="myForm" enctype="multipart/form-data">
+                            <label for="imagen" class="custom-file-upload">
+                                <input type="file"   name="imagen" id="imagen" accept="image/*" onchange="previewSelectedImage()">
+                                <i class="fas fa-folder" ></i> Seleccionar Imagen
+                            </label>
+                        </form>
+
+                    </div>
+                  
+                </div>
+                <div class="modal-footer">
+                    <p id="mensaje-exitoso"  class="hidden-message"></p>
+                    <button class="btn btn-primary" id="open-popup" onclick="uploadImage()"disabled>Subir Imagen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+  <script>
+    let selectedColor = '#0000FF8C';  // Establece un color predeterminado
+
+
+
+    function closePreview() {
+      var previewImage = document.getElementById('preview-image');
+      var fileInput = document.getElementById('imagen');
+      var uploadButton = document.getElementById('open-popup');
+  
+      previewImage.src = '#'; // Limpiar la imagen
+  
+      // Limpiar el campo de entrada de archivos para que se pueda seleccionar una nueva imagen
+      fileInput.value = '';
+  
+      // Mostrar el botón close-button solo si hay una imagen cargada
+      var closeButton = document.querySelector('.close-button');
+      closeButton.style.display = 'none';
+  
+      // Deshabilitar el botón cuando cierras la previsualización
+      uploadButton.disabled = true;
+  }
+  
+
+
+    function previewSelectedImage() {
+      var fileInput = document.getElementById('imagen');
+      var previewImage = document.getElementById('preview-image');
+      var uploadButton = document.getElementById('open-popup');
+  
+      var file = fileInput.files[0];
+  
+      if (file) {
+          var reader = new FileReader();
+  
+          reader.onload = function (e) {
+              previewImage.src = e.target.result;
+              // Habilitar el botón cuando la imagen está cargada
+              uploadButton.disabled = false;
+          };
+  
+          reader.readAsDataURL(file);
+      } else {
+          // Limpiar la vista previa y deshabilitar el botón si no se selecciona ningún archivo
+          previewImage.src = '#';
+          uploadButton.disabled = true;
+      }
+  
+      // Mostrar el botón close-button solo si hay una imagen cargada
+      var closeButton = document.querySelector('.close-button');
+      closeButton.style.display = file ? 'block' : 'none';
+  }
+  
+  
+  
+  function openPreviewModal() {
+      var fileInput = document.getElementById('imagen');
+      var file = fileInput.files[0];
+  
+      if (file) {
+          previewImage(); // Muestra la vista previa si hay un archivo seleccionado
+      } else {
+          alert('Selecciona una imagen antes de previsualizar.');
+      }
+  }
+
+
+
+
+
+
+    function uploadImage() {
+      
+
+      var description = document.getElementById('file-description').value;
+      
+      var fileInput = document.getElementById('imagen');
+      
+      var fileName = '';
+      var accessToken = localStorage.getItem('access_token');
+
+      var randomNumber = Math.round(Math.random() * 1000000);
+    
+      // Verificar si se seleccionó un archivo
+      if (fileInput.files.length > 0) {
+        // Obtener el nombre del archivo del último segmento de la ruta
+        fileName = fileInput.files[0].name;
+      } else {
+        alert('Por favor, seleccione un archivo.');
+        return;
+      }
+
+  
+      var formData = new FormData();
+      formData.append('imagen', fileInput.files[0]);
+      formData.append('nombreArchivo', fileName); // Agregar el nombre del archivo
+      formData.append('descriptionImagen',description)
+      formData.append('randomNumber',randomNumber)
+      formData.append('selectedColor', selectedColor);
+
+      
+      $.ajax({
+        url: '/cargarImagen', // Reemplaza esto con la ruta correcta en tu servidor
+        type: 'POST',
+        data: formData,
+        processData: false, // Evitar que jQuery procese los datos
+        contentType: false, // Evitar que jQuery establezca el tipo de contenido
+        headers: {
+          'Authorization': 'Bearer ' + accessToken
+        },
+        success: function(response) {
+          // Manejar la respuesta del servidor aquí
+          
+          console.log('Imagen cargada con éxito:', response);
+          $('#result').html('Imagen cargada con éxito. Respuesta del servidor: ' + response);
+      
+          // Llamamos a la función para cargar el contenido del modal nuevamente
+          cargarContenidoModal();
+          // Mostrar el mensaje de éxito
+          mostrarMensajeExitoso();
+         
+
+
+        },
+        error: function(error) {
+          // Manejar errores aquí
+         
+            $('#result').html('Error al cargar la imagen. Detalles: ' + JSON.stringify(error));
+            mostrarMensajeError();
+          // Recargar el modal después de un breve retraso
+            setTimeout(function () {
+              cargarContenidoModal();
+          }, 2000);
+        }
+      });
+    }
+
+
+
+
+   function cargarContenidoModal() {
+    // Limpiar la previsualización de la imagen
+    var previewImage = document.getElementById('preview-image');
+    previewImage.src = '#';
+
+    // Deshabilitar el botón "Subir Imagen"
+    var uploadButton = document.getElementById('open-popup');
+    uploadButton.disabled = true;
+
+    // Resto de la lógica para cargar el contenido del modal...
+    // ...
+
+    // Mostrar el modal
+    $('#modalPublicar').modal('show');
+     // Mostrar un mensaje de éxito
+     mostrarMensajeExitoso();
+}
+
+function mostrarMensajeExitoso() {
+  // Asegúrate de que el elemento del mensaje exista en tu modal
+  // Puedes agregar un elemento <p> con un ID específico en tu HTML
+  // Ejemplo: <p id="mensaje-exitoso"></p>
+
+  // Muestra el mensaje
+  var mensajeExitoso = document.getElementById('mensaje-exitoso');
+  mensajeExitoso.innerHTML = 'Cargado exitosamente';
+  // Muestra el mensaje quitando la clase de ocultar
+  mensajeExitoso.classList.remove('hidden-message');
+
+   // Configura un temporizador para ocultar el mensaje después de 3000 milisegundos (3 segundos)
+   setTimeout(function () {
+    mensajeExitoso.classList.add('hidden-message');
+    }, 3000);
+
+}
+
+function mostrarMensajeError() {
+  var mensajeError = document.getElementById('mensaje-exitoso');
+  mensajeError.textContent = 'Error al cargar la imagen';
+  mensajeError.classList.remove('hidden-message');
+
+  setTimeout(function () {
+    elementoMensaje.classList.add('hidden-message');
+  }, 3000);
+}
+
+
+
+
+
+    const modalPublicar = document.getElementById("modalPublicar");
+    
+    var nombreUsuario = localStorage.getItem("usuario");
+   
+
+    window.addEventListener("load", function () {
+      
+      modalPublicar.style.display = "block";
+      document.body.style.overflow = "hidden"; // Deshabilitar el desplazamiento del fondo
+
+     
+      
+    });
+
+    const closeButton = document.querySelector(".btn-close");
+
+    closeButton.addEventListener("click", function (event) {
+      console.log("Se hizo clic en modalPublicar o en el botón de cerrar");
+    
+      document.body.style.overflow = "auto"; // Habilitar el desplazamiento del fondo
+    });
+
+    // Agregar evento de eliminación de imagen al hacer clic en la cruz
+    function addDeleteEvent(imageElement) {
+      const closeButton = document.createElement("span");
+      closeButton.className = "close-button";
+      closeButton.innerHTML = "&#x2715;"; // Icono de cruz
+      closeButton.addEventListener("click", function () {
+        const imageWrapper = imageElement.parentNode;
+        imageWrapper.parentNode.removeChild(imageWrapper);
+      });
+
+      imageElement.appendChild(closeButton);
+    }
+
+    const pickr = Pickr.create({
+      el: '#color-picker-btn',
+      theme: 'classic',
+      default: '#0000FF8C',
+      swatches: [
+        '#FFFFFF73', '#0000007A', '#FF000094', '#00FF006B', '#0000FF5C', '#FFFF0069', '#FE02FE59', '#0CDBDBB3'
+      ],
+      components: {
+        preview: false,
+        opacity: false,
+        hue: true,
+        interaction: {
+          input: false,
+          clear: true,
+          save: true,
+          interaction: false
+        }
+      },
+      i18n: {
+        'btn:save': 'Guardar',
+        'btn:clear': 'Salir'
+      },
+      preview: {
+        label: 'Color seleccionado:',
+      }
+    });
+
+    // Maneja el evento "save" de pickr para obtener el color seleccionado
+    pickr.on('save', (color) => {
+      selectedColor = color.toHEXA().toString();
+      document.getElementById('selected-color').style.backgroundColor = selectedColor;
+      document.getElementById('file-description').style.backgroundColor = selectedColor;
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,41 @@
+[33mcommit 243be8d29eec8cb557058d80fcea5469ead7cd7c[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: mauriciodioli <madioli26@hotmail.com>
+Date:   Fri Feb 10 10:40:09 2023 -0300
+
+    mi primer commit
+
+[33mcommit 8e27dc5c6ab26517ed8367f1091ed3c266a6f17d[m
+Author: mauriciodioli <madioli26@hotmail.com>
+Date:   Thu Feb 24 07:47:37 2022 -0300
+
+    * commit 22_2_22
+
+[33mcommit af3be5beaa8de6f7fc80d55ce55111c3213911cd[m
+Author: mauriciodioli <madioli26@hotmail.com>
+Date:   Tue Feb 22 11:36:14 2022 -0300
+
+    sexto commit 22_2_22
+
+[33mcommit 7119a972ebbaaa43458e8e697c9da919b6c11f6d[m
+Author: FaztTech <fazt@faztweb.com>
+Date:   Thu Jan 3 14:46:57 2019 -0500
+
+    jumbotron added in home.html
+
+[33mcommit 7dc8d71c310e488b227cef8cb28d2d162bd8bb63[m
+Author: FaztTech <fazt@faztweb.com>
+Date:   Thu Jan 3 14:36:32 2019 -0500
+
+    .py removed from procfile
+
+[33mcommit ecea29a72db3793da8f7f3b493147ec157a3ab15[m
+Author: FaztTech <fazt@faztweb.com>
+Date:   Thu Jan 3 14:29:43 2019 -0500
+
+    package-resources removed
+
+[33mcommit 9674741b74ae318146356d246494e769627ba5bc[m
+Author: FaztTech <fazt@faztweb.com>
+Date:   Thu Jan 3 14:22:46 2019 -0500
+
+    first commit

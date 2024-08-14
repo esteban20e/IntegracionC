@@ -1,0 +1,520 @@
+[
+    {
+        "symbol": "Formulas G sheets",
+        "tipo_de_activo": "",
+        "trade_en_curso": "",
+        "ut": "3.000,00",
+        "senial": "31/12/1899"
+    },
+    {
+        "symbol": "Symbol",
+        "tipo_de_activo": "TIPO",
+        "trade_en_curso": "TradeEnCurso",
+        "ut": "UT",
+        "senial": "Se\u00f1al"
+    },
+    {
+        "symbol": "MERV - XMEV - AAPL - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - ABEV - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - ADBE - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - ADI - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - AMD - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "SHORT",
+        "ut": "1",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - AVGO - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - AZN - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "SHORT",
+        "ut": "15",
+        "senial": "OPEN."
+    },
+    {
+        "symbol": "MERV - XMEV - BA - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "OPEN."
+    },
+    {
+        "symbol": "MERV - XMEV - BABA - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "OPEN."
+    },
+    {
+        "symbol": "MERV - XMEV - BBD - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "OPEN."
+    },
+    {
+        "symbol": "TRI.ROS/DIC23 352 C",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "57",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - AGRO - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "3",
+        "senial": "closed."
+    },
+    {
+        "symbol": "TRI.ROS/MAR24 290 C",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "1",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - BMA - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "1",
+        "senial": "OPEN."
+    },
+    {
+        "symbol": "MERV - XMEV - BYMA - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "1",
+        "senial": "OPEN."
+    },
+    {
+        "symbol": "MERV - XMEV - CEPU - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "2",
+        "senial": "OPEN."
+    },
+    {
+        "symbol": "MERV - XMEV - COME - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "SHORT",
+        "ut": "25",
+        "senial": "OPEN."
+    },
+    {
+        "symbol": "MERV - XMEV - CRES - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "SHORT",
+        "ut": "2",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - GGAL - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "SHORT",
+        "ut": "1",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - HARG - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "s+",
+        "ut": "2",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - LOMA - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "1",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - MIRG - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "1",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - PAMP - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "1",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - SUPV - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "1",
+        "senial": "OPEN."
+    },
+    {
+        "symbol": "MERV - XMEV - TECO2 - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "1",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - TGNO4 - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "1",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - TGSU2 - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "1",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - TRAN - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "2",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - TXAR - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "3",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - VALO - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "11",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - YPFD - 48hs",
+        "tipo_de_activo": "ARG",
+        "trade_en_curso": "LONG_",
+        "ut": "1",
+        "senial": "OPEN."
+    },
+    {
+        "symbol": "MERV - XMEV - BP - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - X - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - CAT - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - COIN - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - CSCO - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "SHORT",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - CVX - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - DISN - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - GE - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "LONG_",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - GGB - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - GILD - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - GOOGL - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - GS - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - HD - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - IBM - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - INTC - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - ITUB - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - JNJ - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - JPM - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - KO - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - MELI - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - META - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - MO - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - MSFT - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - NFLX - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - NVDA - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - PSX - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - QCOM - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - RIO - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - RTX - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - SHEL - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - SHOP - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - SQ - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - TSLA - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - TXN - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - V - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - VALE - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - WBA - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - WMT - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "#N/A",
+        "ut": "0",
+        "senial": ""
+    },
+    {
+        "symbol": "MERV - XMEV - XOM - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "_2_NO",
+        "ut": "0",
+        "senial": "closed."
+    },
+    {
+        "symbol": "MERV - XMEV - TGT - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "LONG_",
+        "ut": "0",
+        "senial": "OPEN."
+    },
+    {
+        "symbol": "MERV - XMEV - NIO - 48hs",
+        "tipo_de_activo": "CEDEAR",
+        "trade_en_curso": "_2_NO",
+        "ut": "0",
+        "senial": "closed."
+    }
+]

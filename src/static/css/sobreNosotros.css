@@ -1,0 +1,85 @@
+/* Conservar los estilos actuales */
+#idBotonAcordSN {
+    background-color: rgb(45, 45, 45);
+    color: rgb(255, 255, 255);
+    font-size: 20px; /* Ajusta el tamaño de fuente según tus preferencias */
+    font-weight: bold; /* Agregar negrita */
+  }
+  
+  #collapseOne {
+    background-color: rgb(45, 45, 45);
+  }
+  
+  #collapseDos {
+    background-color: rgb(45, 45, 45);
+  }
+  #collapseTres {
+    background-color: rgb(45, 45, 45);
+  }
+  #collapseCuatro{
+    background-color: rgb(45, 45, 45);
+  }
+  .accordion-button {
+    color: gold;
+    margin-bottom: 0;
+  }
+  
+  #accordionSobreN {
+    margin-bottom: 0;
+  }
+  
+  #accordionSobreN-item {
+    border: 0;
+  }
+  
+  #sobreNcardId {
+    border: 0;
+    margin-top: 40px;
+    box-shadow: 0 6px 12px rgba(218, 165, 32, 0.5); /* Sombra dorada en las tarjetas */
+    transition: box-shadow 0.3s;
+    cursor: pointer; /* Cambia el cursor al pasar por encima de las tarjetas */
+    border-radius: 5px; /* Agrega bordes redondeados a las tarjetas */
+  }
+
+  /* Estilos adicionales para aplicar sombra más grande al pasar el mouse o seleccionar */
+  .cardIndexSobreN:hover,
+  .cardIndexSobreN:focus {
+    box-shadow: 0 10px 20px rgba(218, 165, 32, 0.7); /* Sombra más grande al pasar el mouse o seleccionar */
+  }
+  
+  .accordion-button:hover {
+    background-color: gold;
+    color: rgb(45, 45, 45);
+  }
+  
+ 
+  /* Cambiar el color de la flecha del desplegable a dorado */
+  .accordion-button::after {
+    border-color: gold;
+  }
+  
+  .container-sobre-nosotros {
+    display: flex;
+    align-items: center;
+  }
+  
+  .flex-container {
+    display: flex;
+    align-items: center; /* Alinear verticalmente */
+  }
+  
+  .image-container-sobre-nosotros {
+    flex: 0 0 50%; /* O el porcentaje deseado para la imagen */
+    padding-right: 20px; /* Espacio entre la imagen y el texto */
+  }
+
+  .image-container-sobre-nosotros img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .text-container-sobre-nosotros {
+    flex: 1;
+  }
+
+ 

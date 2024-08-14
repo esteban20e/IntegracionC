@@ -1,0 +1,78 @@
+{% extends "layouts/layoutConexBroker.html" %}
+{% block content %}
+
+<div class="jumbotron">
+  <h1 class="display-4">Señales!</h1>
+  <p class="lead">Para operar puede ir a paneles</p>
+  <hr class="my-4">
+</div>
+
+<div class="container p-4" >   
+  <table class="table table-dark table-striped" id="signalTable">
+    <thead>           
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Symbol</th>
+        <th scope="col">type </th>
+        <th scope="col">Signal</th>
+        <th scope="col">In Progress</th>
+        <th scope="col"> Ut</th>      
+      </tr>            
+    </thead>
+    <tbody>
+      {% for dato in datos %}
+      
+        <tr class="fila-{{ dato[7] }}">
+          <th scope="row">{{ dato[7] }}</th>
+          <td>{{ dato[0].replace('MERV - XMEV -', '') }}</td>
+          <td>{{ dato[1].replace('MERV - XMEV -', '') }}</td>
+          <td>{{ dato[4].replace('MERV - XMEV -', '') }}</td>
+          <td>{{ dato[2].replace('MERV - XMEV -', '') }}</td>
+          <td>{{ dato[3].replace('MERV - XMEV -', '') }}</td>                             
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% if cuenta is defined %}
+    <script>
+        var cuentaa = "{{ cuenta[0] }}";
+        usuario = "{{ cuenta[1] }}";
+        selector = "{{ cuenta[2] }}";
+        localStorage.setItem("cuenta", cuentaa);
+        localStorage.setItem("selector", selector);
+        localStorage.setItem("usuario", usuario);
+    </script>
+{% endif %}
+<script>
+        
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var isFirstTime = localStorage.getItem('hasVisited');
+    //debugger;
+    if (isFirstTime=='false') {
+      access_token = localStorage.getItem("access_token")  
+      refresh_token = localStorage.getItem('refresh_token');
+      correo_electronico = localStorage.getItem('correo_electronico');
+      cuenta = localStorage.getItem("cuenta");
+      usuario = localStorage.getItem("usuario");
+      simuladoOproduccion = localStorage.getItem("selector");
+      selectedCountry  = localStorage.getItem('paisSeleccionado');
+      
+      // Tu código aquí
+     
+  
+      localStorage.setItem('hasVisited', 'true'); // Marcar como visitado
+    
+      var usuario_id = localStorage.getItem('usuario_id');
+      var pais = 'argentina';  
+      var layoutOrigen = 'layoutConexBroker';
+      var url = '/panel_control_sin_cuenta?country=' + pais + '&layoutOrigen=' + layoutOrigen+'&usuario_id='+usuario_id;
+      window.location.href = url;
+    }
+  });
+  
+</script>
+
+{% endblock %}

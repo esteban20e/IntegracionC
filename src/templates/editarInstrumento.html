@@ -1,0 +1,39 @@
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+{% for message in messages%}  
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends 'layouts/layoutConexBroker.html'%}
+{% block content%}
+            <div class = 'container p-4'>
+                <div class = "col-md-4 offset-md-4">
+                <form action="/editar/{{dato.id}}" method="POST">
+                   
+                    <div class="form-group"><input type="text" name="especie" placeholder="escribe simbolo" value = {{dato.especie}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="c_compra" placeholder="escribe simbolo" value = {{dato.c_compra}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="p_compra" placeholder="escribe simbolo" value = {{dato.p_compra}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="p_venta" placeholder="escribe simbolo" value = {{dato.p_venta}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="c_venta" placeholder="escribe simbolo" value = {{dato.c_venta}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="ultimo" placeholder="escribe simbolo" value = {{dato.ultimo}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="var" placeholder="escribe simbolo" value = {{dato.var}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="apertura" placeholder="escribe simbolo" value = {{dato.apertura}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="minimo" placeholder="escribe simbolo" value = {{dato.minimo}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="maximo" placeholder="escribe simbolo" value = {{dato.maximo}} class="form-control"> </div>           
+                    <div class="form-group"><input type="text" name="cierre_anterior" placeholder="escribe simbolo" value = {{dato.cierre_anterior}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="volumen" placeholder="escribe simbolo" value = {{dato.volumen}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="vol_monto" placeholder="escribe simbolo" value = {{dato.vol_monto}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="vwap" placeholder="escribe simbolo" value = {{dato.vwap}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="idsegmento" placeholder="escribe simbolo" value = {{dato.idsegmento}} class="form-control"> </div>
+                    <div class="form-group"><input type="text" name="idmarket" placeholder="escribe simbolo" value = {{dato.idmarket}} class="form-control"> </div> 
+                 
+                    <div class="form-group"><Button type="submit" class="btn btn-primary btn-sm btn-block form-control" >Submit</Button>
+                </form> 
+            </div> 
+            </div>
+{%endblock%}
+       

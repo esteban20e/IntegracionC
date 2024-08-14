@@ -1,0 +1,44 @@
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+{% for message in messages%}  
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends 'layouts/layoutConexBroker.html'%}
+{% block content%}
+
+                  <div class = 'container p-4'>
+                  <table class="table table-dark table-striped">
+                    <thead>           
+                        <tr>
+                            <th scope="col">Ticker</th>                                                        
+                            <th scope="col">Quitar</th> 
+                                                                                 
+                        </tr>            
+                    </thead>
+                    <tbody>
+                      
+                      {% for dato in datos%}
+                        <tr>
+                            <th scope="row">{{dato.symbol}}</th>                                                   
+                                                                                                
+                            <td>
+                              <form action="/suscDelete/" method="POST">
+                                <div class="form-group"><input type="hidden" name="id" placeholder="escribe simbolo" value = {{dato.id}} class="form-control"> </div>                               
+                                <div class="form-group"><Button type="submit" class="btn btn-primary btn-sm btn-block form-control" >Quitar</Button>
+                              </form>
+                            </td>
+                          </tr>  
+                       
+                      {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{%endblock%}
+ 

@@ -1,0 +1,88 @@
+/* Estilos para el contenedor de las tarjetas */
+#cardIndex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+   
+  }
+  
+  /* Estilos para las tarjetas */
+  .cardIndexPlanes {
+    flex: 1 0 300px;
+    transition: box-shadow 0.3s;
+    cursor: pointer; /* Cambia el cursor al pasar por encima de las tarjetas */
+    border-radius: 5px; /* Agrega bordes redondeados a las tarjetas */
+    background-color: #333; /* Fondo gris oscuro para las tarjetas */
+    box-shadow: 0 6px 12px rgba(218, 165, 32, 0.5); /* Sombra dorada en las tarjetas */
+    max-width: 300px;
+    margin: 20px;
+  }
+  
+  /* Estilos adicionales para aplicar sombra más grande al pasar el mouse o seleccionar */
+  .cardIndexPlanes:hover,
+  .cardIndexPlanes:focus {
+    box-shadow: 0 10px 20px rgba(218, 165, 32, 0.7); /* Sombra más grande al pasar el mouse o seleccionar */
+  }
+  
+  /* Estilos adicionales para que las tarjetas sean responsive en pantallas pequeñas */
+  @media (max-width: 768px) {
+    .cardIndexPlanes {
+      flex-basis: 100%; /* Ocupar todo el ancho en pantallas pequeñas */
+    }
+  }
+  
+  /* Estilos para la línea de separación blanca */
+  .separator {
+    border: none;
+    height: 2px; /* Ajustamos el grosor de la línea separadora */
+    background-color: white;
+    margin: 10px 0; /* Agrega espacio entre la línea y el contenido */
+  }
+  
+  
+  /* Estilos para el botón */
+  .card-button {
+    background-color: transparent; /* Fondo transparente para el botón en el estado normal */
+    color: #fff; /* Texto en blanco para el título del botón */
+    font-weight: bold; /* Texto en negrita para el título del botón */
+    border: 2px solid gold; /* Borde dorado para el botón en el estado normal */
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .card-button:hover {
+    background-color: gold; /* Cambia el color de fondo al pasar el mouse sobre el botón */
+  }
+  
+  .card-button:focus {
+    outline: none; /* Elimina el borde de enfoque al hacer clic en el botón */
+  }
+  
+  
+  /* Estilos para la banda negra en la esquina superior derecha */
+  .card-corner-band {
+    position: absolute;
+    top: 0;
+    right: 20px; /* Ajustamos el valor de right para mover la banda hacia la izquierda */
+    width: 20px;
+    height: 80px;
+    background-color: black;
+    transform: translate(50%, -10%) rotate(140deg); /* Rotamos la banda 90 grados */
+    z-index: 1; /* Para asegurarnos de que la banda aparezca encima del contenido de la tarjeta */
+  }
+  
+  /* Estilos para el texto dentro de la banda */
+  .card-corner-text {
+    position: absolute;
+    top: 50%; /* Centra verticalmente el texto */
+    left: 50%; /* Centra horizontalmente el texto */
+    transform: translate(-50%, -50%) rotate(270deg); /* Rota el texto verticalmente */
+    color: white; /* Color blanco para el texto */
+    font-size: 12px; /* Tamaño del texto */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centra el texto horizontalmente */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  }
+  

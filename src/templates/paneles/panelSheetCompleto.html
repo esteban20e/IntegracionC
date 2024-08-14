@@ -1,0 +1,40 @@
+{% extends "layouts/layout_signal.html" %}
+{% block content %}
+
+<div class="jumbotron">
+  <h1 class="display-4">Signals!</h1>
+  <p class="lead">To operate you can go to Dashboard</p>
+  <hr class="my-4">
+</div>
+
+<div class="container p-4">   
+  <table class="table table-dark table-striped" id="signalTable">
+    <thead>           
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Symbol</th>
+        <th scope="col">type </th>
+        <th scope="col">Signal</th>
+        <th scope="col">In Progress</th>
+        <th scope="col"> Ut</th>      
+      </tr>            
+    </thead>
+    <tbody>
+      {% for dato in datos %}
+      
+        <tr class="fila-{{ dato[7] }}">
+          <th scope="row">{{ dato[7] }}</th>
+          <td>{{ dato[0].replace('MERV - XMEV -', '') }}</td>
+          <td>{{ dato[1].replace('MERV - XMEV -', '') }}</td>
+          <td>{{ dato[4].replace('MERV - XMEV -', '') }}</td>
+          <td>{{ dato[2].replace('MERV - XMEV -', '') }}</td>
+          <td>{{ dato[3].replace('MERV - XMEV -', '') }}</td>                       
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+{% endblock %}

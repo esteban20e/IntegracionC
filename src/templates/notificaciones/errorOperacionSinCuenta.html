@@ -1,0 +1,21 @@
+{% if layout == 'layout'%}
+    {% extends 'layouts/layout.html' %}
+{% endif %}
+
+{% if layout == 'layout_fichas'%}
+    {% extends 'layouts/layout_fichas.html' %}
+{% endif %}
+
+{% if layout == 'layoutConexBroker' %}
+   {% extends 'layouts/layoutConexBroker.html' %}    
+{% endif %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1 class="display-4">La operacion NO se efectuo correctamente!</h1>
+  
+ 
+</div>
+
+{% endblock%}

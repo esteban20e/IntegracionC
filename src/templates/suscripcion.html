@@ -1,0 +1,81 @@
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+{% for message in messages%}  
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends 'layouts/layoutConexBroker.html'%}
+{% block content%}
+
+            <div class = 'container p-4'>     
+                  <div>
+                    <p>Para Detener presionar el boton.</p>
+                    <a class="btn btn-primary btn-lg" href="/detenerWSSuscripcionInstrumentos/" role="button">DETENER </a>
+                </div>           
+                  <div class = 'container p-4'>
+                  <table class="table table-dark table-striped" id="tabla-cotizaciones">                  
+                      <thead>
+                       
+                        <tr>
+                          <th>Instrumento</th>
+                          <th>Último precio</th>
+                          <th>Bid</th>
+                          <th>size</th>
+                          <th>Ask</th>
+                          <th>size</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for dato in datos[0] %}
+                          
+                            <tr id="{{ dato.ticker }}">
+                              <th>{{ dato.ticker }}</th>
+                              <td>{{ dato.last }}</td>
+                              <td>{{ dato.bid.0.price }}</td>
+                              <td>{{ dato.bid.0.size }}</td>
+                              <td>{{ dato.offer.0.price}}</td>
+                              <td>{{ dato.offer.0.size}}</td>
+                              
+                            </tr>
+                         
+                        {% endfor %}
+                        
+                      </tbody>
+                      <table id="market-data">
+                        <thead>
+                            <tr>
+                                <th>Instrumento</th>
+                                <th>Bid</th>
+                                <th>Ask</th>
+                                <th>Último Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                   
+                    
+                    <script>
+                      // Establecer la conexión WebSocket
+                      const ws = new WebSocket("ws://localhost:8765");
+                      ws.onopen = function() {
+                          console.log("Conexión establecida.");
+                      };
+              
+                     
+                  </script>
+                      
+                      
+                    
+            
+          <div>
+            <input type="text" name="ws" id="fecha">
+          </div>
+        </div>
+        
+{%endblock%}
+ 

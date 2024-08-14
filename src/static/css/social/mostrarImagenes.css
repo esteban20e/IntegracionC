@@ -1,0 +1,26 @@
+/* mostrarImagen.css */
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+.close-button-mostrar {
+
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ddd; /* Gris claro */
+    color: black;
+    border: none;
+    width: 30px; /* Ajusta el ancho del botón */
+    height: 30px; /* Ajusta la altura del botón */
+    border-radius: 50%; /* Hace el botón redondo */
+    padding: 8px;
+    cursor: pointer;
+    z-index: 1; /* Asegura que el botón esté adelante de la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

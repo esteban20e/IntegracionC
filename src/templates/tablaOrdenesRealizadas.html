@@ -1,0 +1,161 @@
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+{% for message in messages%}  
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends 'layouts/layoutConexBroker.html'%}
+{% block content%}
+
+<table border="1" class="dataframe">
+
+
+  <div class = 'container p-4'>
+    
+    <div class="container p-4">
+      <div class="row">
+        <div class="col-md-4">
+          <form id="filterForm">
+            <input type="text" name="symbol" placeholder="symbol">
+            <Button type="button" onclick="filterTable()">Submit</Button>
+        </form>
+        
+        </div>
+        <div class="col-md-4">
+          <form name="logeo" action="/botonPanicoPortfolio/" method="post" class="btn-guardar_inst">          
+            <input type="hidden" name="account" id="account">
+            <input type="hidden" name="access_token_portfolio" id="access_token_portfolio">
+            <input type="hidden" name="usuario_portfolio" id="usuario_portfolio">
+            <input type="hidden" name="correo_electronico_portfolio" id="correo_electronico_portfolio">
+            
+            <button type="submit" class="btn btn-danger my-2">TERMINAR TODO</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+      
+    <table class="table table-dark table-striped">
+      <thead>           
+          <tr>
+          <!--
+              <th scope="col">Ticker</th>
+              <th scope="col">Timestamp</th>
+              <th scope="col">vol. Compra</th>
+              <th scope="col">precio Compra</th>
+              <th scope="col">precio Venta</th>
+              <th scope="col"> Vol. Venta</th>                           
+              <th scope="col">Ult. Precio Operado</th>
+          -->   
+              <th scope="col">orderId</th>  
+              <th scope="col">clOrdId</th>             
+              <th scope="col">symbol</th>
+              <th scope="col">accountId</th>
+              <th scope="col">ordType</th>
+              <th scope="col">price</th>
+              <th scope="col"> orderQty</th>                           
+              <th scope="col">side</th>
+              <th scope="col">status</th>
+              <th scope="col">proprietary</th>
+              <th scope="col">Timestamp</th>
+              <th scope="col">Cancel</th>
+              <th scope="col">Modif</th>
+              <th scope="col">Vender</th>    
+                                       
+          </tr>            
+      </thead>
+      <tbody>
+        {% for dato in datos%}          
+           <tr data-symbol="{{dato.instrumentId.symbol}}">
+              <th scope="row">{{dato.orderId}}</th>
+              <th>{{dato.clOrdId}}</th>
+              <th>{{dato.instrumentId.symbol}}</th>
+              <th>{{dato.accountId.id}}</th>
+              <th>{{dato.ordType}}</th>
+              <th>{{dato.price}}</th>
+              <th>{{dato.orderQty}}</th>
+              <th>{{dato.side}}</th>
+              <th>{{dato.status}}</th>
+              <th>{{dato.proprietary}}</th>
+              <th>{{dato.transactTime}}</th>
+             <!-- <td><a href="/webSocket/{{dato.instrumentId.symbol}}" class="btn btn-primary btn-sm">Suscribir</a></td>-->                            
+              <td>
+                <form action="/cancelarOrden/" method="POST">
+                  <div class="form-group"><input type="hidden" name="symbol" placeholder="escribe simbolo" value = {{dato.instrumentId.symbol.replace(" ", "")}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="clOrdId" placeholder="escribe simbolo" value = {{dato.clOrdId.replace(" ", "")}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="price" placeholder="escribe simbolo" value = {{dato.price}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="proprietary" placeholder="escribe simbolo" value = {{dato.proprietary.replace(" ", "")}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="estado" placeholder="escribe simbolo" value = {{dato.text.replace(" ", "")}} class="form-control"> </div> 
+                  
+                  <div class="form-group"><Button type="submit" class="btn btn-primary btn-sm btn-block form-control" >Submit</Button>
+                </form>
+              </td>
+              <td>
+                <form action="/modificar/" method="POST">
+                  <div class="form-group"><input type="hidden" name="symbol" placeholder="escribe simbolo" value = {{dato.instrumentId.symbol.replace(" ", "")}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="clOrdId" placeholder="escribe simbolo" value = {{dato.clOrdId.replace(" ", "")}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="price" placeholder="escribe simbolo" value = {{dato.price}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="proprietary" placeholder="escribe simbolo" value = {{dato.proprietary.replace(" ", "")}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="estado" placeholder="escribe simbolo" value = {{dato.text.replace(" ", "")}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="accountId" placeholder="escribe simbolo" value = {{dato.accountId.id.replace(" ", "")}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="orderQty" placeholder="escribe simbolo" value = {{dato.orderQty}} class="form-control"> </div> 
+                
+                  <div class="form-group"><Button type="submit" class="btn btn-primary btn-sm btn-block form-control" >Submit</Button>
+                </form>
+              </td>
+              <td>
+                <form action="/mostrarLaVenta/" method="POST">
+                  <div class="form-group"><input type="hidden" name="symbol" placeholder="escribe simbolo" value = {{dato.instrumentId.symbol.replace(" ", "")}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="clOrdId" placeholder="escribe simbolo" value = {{dato.clOrdId.replace(" ", "")}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="price" placeholder="escribe simbolo" value = {{dato.price}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="proprietary" placeholder="escribe simbolo" value = {{dato.proprietary.replace(" ", "")}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="estado" placeholder="escribe simbolo" value = {{dato.text.replace(" ", "")}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="accountId" placeholder="escribe simbolo" value = {{dato.accountId.id.replace(" ", "")}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="orderQty" placeholder="escribe simbolo" value = {{dato.orderQty}} class="form-control"> </div> 
+                  <div class="form-group"><input type="hidden" name="ordType" placeholder="escribe simbolo" value = {{dato.ordType}} class="form-control"> </div> 
+                
+                  <div class="form-group"><Button type="submit" class="btn btn-primary btn-sm btn-block form-control" >Submit</Button>
+                </form>
+              </td>
+            </tr>  
+         
+        {% endfor %}
+
+      </tbody>
+  </table>
+  <script>
+  
+      cuenta = localStorage.getItem("cuenta");
+      access_token = localStorage.getItem('access_token');
+      correo_electronico = localStorage.getItem('correo_electronico');
+      usuario = localStorage.getItem("usuario");
+     
+      document.getElementById("usuario_portfolio").value = usuario
+      document.getElementById("correo_electronico_portfolio").value = correo_electronico
+      document.getElementById("access_token_portfolio").value = access_token
+      document.getElementById("account").value = account;
+
+      function filterTable() {
+        // Obtén el valor del input con name="symbol"
+        const symbolInput = document.querySelector('input[name="symbol"]');
+        const symbolToFilter = symbolInput.value.toLowerCase(); // Convierte a minúsculas para una búsqueda sin distinción entre mayúsculas y minúsculas
+      
+        // Recorre las filas de la tabla y muestra/oculta según la búsqueda parcial
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+          const symbolInRow = row.getAttribute('data-symbol').toLowerCase(); // Convierte a minúsculas
+          if (symbolInRow.includes(symbolToFilter) || symbolToFilter === "") {
+            row.style.display = ""; // Muestra la fila
+          } else {
+            row.style.display = "none"; // Oculta la fila
+          }
+        });
+      }
+
+  </script>
+</div>
+{%endblock%}

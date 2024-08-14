@@ -1,0 +1,66 @@
+
+.card {
+    position: relative;
+    border: 2px solid #ccc; /* Ajusta el color del borde según tu preferencia */
+    border-radius: 8px; /* Ajusta la curvatura de las esquinas */
+    margin: 10px; /* Ajusta el margen entre las tarjetas */
+}
+
+.card-header {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 6px 6px 0 0; /* Borde redondeado solo en la parte superior */
+}
+
+.card-body {
+    position: relative;
+    padding: 10px;
+}
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px; /* Borde redondeado para la imagen */
+}
+
+.card-footer {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    border-radius: 0 0 6px 6px; /* Borde redondeado solo en la parte inferior */
+}
+
+
+.close-card {
+    position: absolute;
+    top: 10px;
+    right: 10px;    
+    color: rgb(0, 0, 0);
+    border: none;
+    width: 30px; /* Ajusta el ancho del botón */
+    height: 30px; /* Ajusta la altura del botón */
+    border-radius: 50%; /* Hace el botón redondo */
+    padding: 8px;
+    cursor: pointer;
+    z-index: 1; /* Asegura que el botón esté adelante de la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.despliegue-card {
+    top: 10px;
+    right: 10px;
+    color: rgb(0, 0, 0);
+    border: none;
+    width: 30px; /* Ajusta el ancho del botón */
+    height: 30px; /* Ajusta la altura del botón */
+    border-radius: 50%; /* Hace el botón redondo */
+    padding: 8px;
+    cursor: pointer;
+    z-index: 1; /* Asegura que el botón esté adelante de la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

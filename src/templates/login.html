@@ -1,0 +1,187 @@
+{% extends 'layouts/layout.html' %}
+{% block content %}
+
+
+<html lang="es">
+  
+<body> 
+
+  <div class = 'container p-4'>
+    <h1 name = "mensaje" id = "mensaje " >LOGEO EN PRIMARY API</h1>
+    <div class = "col-md-4 offset-md-4">
+    
+
+    <!--<meta http-equiv="refresh" content="1;url=http://localhost:5000/cargar" />-->
+
+    <form  name="logeo" action="/loginExtCuentaSeleccionadaBroker" method="post" class="btn-guardar_inst">
+      <input type="hidden" name="fecha" id="fecha">
+      <input type="hidden" name="access_token" id="access_token"> 
+      <input type="hidden" name="environment" id="environment"> 
+      <input type="hidden" name="origin_page" value="login">
+      <input type="text" name="usuario" placeholder="mauriciodioli6603" >  
+      <input type="text" name="contraseña" placeholder="zbwitW5#"  >
+      <input type="text" name="cuenta" placeholder="REM6603"  >
+        
+      <select class="form-select"aria-label="Default select example" name = "selctorEnvironment" id="selctorEnvironment">
+        <option selected>Open this select menu</option>
+        <option value="simulacion">Simulacion</option>
+        <option value="produccion">Produccion</option>     
+      </select>  
+      <div class="col">           
+        <button type="submit" class="btn btn-primary my-2">Loguear</button>
+      </div>
+      <div class="col">    
+          <a href="/registrar_cuenta_broker">    
+            <button type="button" class="btn btn-secondary my-2">Agregar cuenta</button> 
+          </a>       
+      </div>
+    </form>
+  
+      <script>
+
+        document.getElementById("selctorEnvironment").addEventListener("change", function() {
+          // Obtener el valor seleccionado
+          var selectedValue = this.value;
+          
+          // Guardar el valor en el localStorage
+          localStorage.setItem("selector", selectedValue);
+        });
+              // Capturar el evento de envío del formulario
+          document.querySelector("form[name='logeo']").addEventListener("submit", function() {
+            // Obtener el valor de environment desde el localStorage
+            var environment = localStorage.getItem("selector");
+
+            // Agregar el valor de environment al campo oculto en el formulario
+            document.getElementById("environment").value = environment;
+          });
+
+
+
+
+
+
+        let guardada = localStorage.getItem("date")
+        access_token = localStorage.getItem("access_token")  
+        console.log("entra en scriptt en archivo login.html y guarda la fecha: ",guardada)//muestra localStorage
+       // console.log("entra en scriptt en archivo login.html y guarda la token: ",tokenGuardado)//muestra localStorage    
+       if (!access_token || tokenExpirado(access_token)) {
+        // Obtener los tokens desde el diccionario de contexto de Flask
+        {% if tokens is defined %}
+          access_token = "{{ tokens[0] }}";
+          const refresh_token = "{{ tokens[1] }}";
+          const correo_electronico = "{{ tokens[2] }}";
+          const expiry_timestamp = "{{ tokens[3] }}";  // Marca de tiempo de expiración
+          const roll = "{{ tokens[4] }}";
+      
+          // Almacenar los tokens y la marca de tiempo de expiración en el localStorage
+          localStorage.setItem("access_token", access_token);
+          localStorage.setItem("refresh_token", refresh_token);
+          localStorage.setItem("correo_electronico", correo_electronico);
+          localStorage.setItem("expiry_timestamp", expiry_timestamp);
+          localStorage.setItem("roll",roll);
+        {% endif %}
+      }
+      else {
+        // Token válido, usarlo para la solicitud AJAX
+        document.getElementById("access_token").value = access_token;
+      }
+      
+      // Función para verificar si el token ha expirado
+      function tokenExpirado(token) {
+        const expiry_timestamp = localStorage.getItem("expiry_timestamp");
+        if (!expiry_timestamp) {
+          return true;  // No se encontró la marca de tiempo de expiración, considerar expirado
+        }
+        const now_timestamp = new Date().getTime() / 1000;  // Convertir a segundos
+        return now_timestamp >= expiry_timestamp;
+      }
+      /////////////////////// en esta seccion llama para ver
+      var token = localStorage.getItem('access_token');
+      if (tokenExpirado(token)) {
+        // Almacenar los nuevos tokens en el localStorage
+        
+        localStorage.setItem("refresh_token", response.refresh_token);
+        localStorage.setItem("correo_electronico", correo_electronico);
+        localStorage.setItem("expiry_timestamp", response.expiry_timestamp);
+        
+        // Usar el nuevo access_token para la solicitud AJAX
+        document.getElementById("token").value = response.access_token;
+        console.log("Se ha obtenido un nuevo token exitosamente.");
+      }
+      else {
+        console.log("No se pudo obtener un nuevo token.");
+      }
+
+
+      
+      ///////////////////// en esta parte se llama para el logeo autmatico en el broker////////////////
+      
+         
+            // Obtener el token del localStorage
+            
+            var refresh_token = localStorage.getItem('refresh_token');
+            correo_electronico = localStorage.getItem('correo_electronico');
+            var cuenta = localStorage.getItem("cuenta");
+            var usuario = localStorage.getItem("usuario");
+            var simuladoOproduccion = localStorage.getItem("selector");
+
+            if (access_token) { // Verificar si el token existe en el localStorage
+              
+              // Enviar una solicitud a la ruta Flask y pasar el token como parte del cuerpo de la solicitud en formato JSON
+              $.ajax({
+                type: "POST",
+                url: "{{ url_for('get_login.loginExtAutomatico') }}",
+                contentType: "application/json",
+                data: JSON.stringify({
+                                      'rutaDeLogeo':'loginEnBroker',
+                                      'access_token': access_token,                                      
+                                      'refresh_token':refresh_token,
+                                      'correo_electronico':correo_electronico,
+                                      'cuenta':cuenta,
+                                      'usuario':usuario,
+                                      'simuladoOproduccion':simuladoOproduccion,
+                                     
+                                    }),
+                success: function(response) {
+                  if (response.redirect) {
+                    window.location.href = response.redirect;
+                  } else {
+                    // handle error
+                    showError("No se pudo redirigir al usuario se debe ingresar el usario de broker");
+                  }
+                },
+                error: function(error) {
+                  // handle error
+                  showError("Hubo un error en la solicitud AJAX");
+                }
+              });
+            }
+          
+       
+            function showError(message) {
+              // Crear un elemento para mostrar el mensaje de error
+              var errorElement = document.createElement('div');
+              errorElement.className = 'error-message';
+              errorElement.textContent = message;
+          
+              // Agregar el elemento de error al DOM (por ejemplo, al cuerpo del documento)
+              document.body.appendChild(errorElement);
+          }
+
+
+      </script>
+
+    
+
+
+    
+
+
+
+
+    </div>
+  </div>
+</body>
+</html>
+
+{% endblock%}

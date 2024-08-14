@@ -1,0 +1,253 @@
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages%}  
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends 'layouts/layoutConexBroker.html'%}
+{% block content%}
+
+  
+  <div>
+    <h2>Cuentas de Usuarios</h2>
+    <table class="table table-dark table-striped">
+      <thead>           
+        <tr>
+          <th scope="col">id</th>          
+          <th scope="col">user_id</th>
+          <th scope="col">userCuenta</th>
+          <th scope="col">accountCuenta</th>
+          <th scope="col">Acciones</th>
+        </tr>            
+      </thead>
+      <tbody>
+        <!-- Aquí se mostrarán los usuarios -->
+        {% for Cuenta in datos %}
+        <tr>
+          <td>{{ Cuenta.id }}</td>
+          <td>{{ Cuenta.user_id }}</td>          
+          <td>{{ Cuenta.userCuenta }}</td>
+          <td>{{ Cuenta.accountCuenta }}</td>          
+         
+          <td class="d-flex">          
+            <button type="button" class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#eliminarCuentaModal" data-Cuenta-id="{{ Cuenta.id }}" onclick="setUserData(this.getAttribute('data-Cuenta-id'))">Eliminar</button>
+
+           
+                       
+            <form action="/estrategias-Cuenta" method="POST">
+                <div class="form-group">
+                    <input type="hidden" name="Cuenta_id" placeholder="escribe cuenta" value="{{ Cuenta.id }}" class="form-control">
+                </div>                               
+                <div class="form-group">
+                    <button type="submit" class="btn btn-secondary btn-sm btn-block form-control mx-2">Estrategias</button>
+                </div>
+            </form>
+        </td>
+        
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <form id="registro-Cuenta-form" action="/registro-Cuenta-administracion/" method="POST">
+      <div class="form-group">
+        <label for="userSistema">Usuario:</label>
+        <input type="text" class="form-control" id="userSistema" name="userSistema" required>
+      </div>
+      <div class="form-group">
+        <label for="userCuentaBroker">Usuario Cuenta Broker:</label>
+        <input type="text" class="form-control" id="userCuentaBroker" name="userCuentaBroker" required>
+      </div>
+      <div class="form-group">
+        <label for="accountCuentaBroker">Cuenta Broker:</label>
+        <input type="text" class="form-control" id="accountCuentaBroker" name="accountCuentaBroker" required>
+      </div>
+      <div class="form-group">
+        <label for="passwordCuentaBroker">Password Cuenta Broker:</label>
+        <input type="text" class="form-control" id="passwordCuentaBroker" name="passwordCuentaBroker" required>
+      </div>
+      <div class="form-group">
+        <div class="g-recaptcha my-2" data-sitekey="TU_CLAVE_DE_SITIO"></div>
+      </div>
+      <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#seleccionarUsuarioModal">Seleccionar Usuario</button>
+      <button type="submit" class="btn btn-primary my-2">Registrarse como Cuenta</button>
+    </form>
+  </div>
+  
+
+  <div class="modal fade" id="editarCuentaModal" tabindex="-1" aria-labelledby="editarCuentaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarCuentaModalLabel">Editar Cuenta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="editarCuentaForm" action="/editar-Cuenta" method="POST">
+          <div class="modal-body">
+            <input type="hidden" id="editarCuentaId" name="id">
+            <div class="form-group">
+              <label for="editarCuentaEmail">Email:</label>
+              <input type="email" class="form-control" id="editarCuentaEmail" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="editarCuentaRol">Rol:</label>
+              <select class="form-control" id="editarCuentaRol" name="rol">
+                <option value="Cuenta">Cuenta</option>
+                <option value="ADMINISTRADOR">Administrador</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="eliminarCuentaModal" tabindex="-1" aria-labelledby="eliminarCuentaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eliminarCuentaModalLabel">Eliminar Cuenta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="/eliminar-Cuenta-broker-administracion" method="POST">
+          <div class="modal-body">
+            <input type="hidden" id="eliminarCuentaId" name="eliminarCuentaId" value = "">
+            <p class="fw-bold text-dark"  style="color: black;">¿Está seguro de que desea eliminar este Cuenta?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="seleccionarUsuarioModal" tabindex="-1" aria-labelledby="seleccionarUsuarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="seleccionarUsuarioModalLabel" style="color: black;" >Seleccionar Usuario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul>
+            {% for usuario in usuarios %}
+            <ul>
+            </ul>
+              <li>
+                <button type="button" class="btn btn-primary" onclick="seleccionarUsuario('{{ usuario.id }}', '{{ usuario.nombre }}')">{{ usuario.nombre }}</button>
+              </li>
+            
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!-- Enlaces a scripts de JavaScript -->
+<script >
+  $(document).ready(function() {
+    // Validación del nombre
+    var nombre = document.getElementById("correo_electronico");
+    function validateNombre(event) {
+      if (nombre.value.indexOf(' ') >= 0) {
+        nombre.setCustomValidity("El correo_electronico no debe contener espacios en blanco");
+        event.preventDefault();
+      } else {
+        nombre.setCustomValidity("");
+      }
+    }
+  
+    // Validación de la confirmación de contraseña
+    var password = document.getElementById("password");
+    var confirm_password = document.getElementById("confirm_password");
+  
+    function validatePassword() {
+      if (password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Las contraseñas no coinciden");
+      } else {
+        confirm_password.setCustomValidity("");
+      }
+    }
+  
+    nombre.onchange = validateNombre;
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+  });
+
+  const editButtons = document.querySelectorAll('[data-bs-target="#editarCuentaModal"]');
+  editButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const userId = button.dataset.CuentaId;
+      const userEmail = button.dataset.CuentaEmail;
+      const userRol = button.dataset.CuentaRol;
+      document.querySelector('#editarCuentaId').value = userId;
+      document.querySelector('#editarCuentaEmail').value = userEmail;
+      document.querySelector('#editarCuentaRol').value = userRol;
+    });
+  });
+
+
+  function setUserData(cuentaId) {
+    document.getElementById('eliminarCuentaId').value = cuentaId;
+  
+  }
+
+
+ 
+    function seleccionarUsuario(usuarioId, usuarioNombre) {
+      document.getElementById('userSistema').value = usuarioNombre;
+      // Puedes almacenar el ID del usuario seleccionado en un campo oculto para enviarlo junto con el formulario de registro
+      document.getElementById('usuarioIdSeleccionado').value = usuarioId;
+      // Cierra el modal de selección de usuario
+      const modal = document.getElementById('seleccionarUsuarioModal');
+      const bootstrapModal = bootstrap.Modal.getInstance(modal);
+      bootstrapModal.hide();
+    }
+
+    ////cuando se abre el modal se llama la funcion para cargar los usuarios
+    document.getElementById('seleccionarUsuarioModal').addEventListener('shown.bs.modal', function () {
+      cargarUsuarios();
+    });
+    function cargarUsuarios() {
+      fetch('/usuariosModal/')
+        .then(response => response.json())
+        .then(data => {
+          const usuarios = data.usuarios;  // Suponiendo que la respuesta JSON contiene una propiedad "usuarios" con los datos de los usuarios
+          const ul = document.querySelector('.modal-body ul');
+          ul.innerHTML = '';  // Limpia la lista existente
+    
+          usuarios.forEach(usuario => {
+            const li = document.createElement('li');
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'btn btn-primary';
+            button.innerText = usuario.nombre;
+            button.addEventListener('click', () => {
+              seleccionarUsuario(usuario.id, usuario.nombre);
+            });
+    
+            li.appendChild(button);
+            ul.appendChild(li);
+          });
+        })
+        .catch(error => console.error(error));
+    }
+    
+</script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "layouts/layout.html" %}
+{% block content %}
+
+<div class="jumbotron">
+  <h1 class="display-4">No se encuentra logeado en ninguna cuenta!</h1>
+ 
+  <hr class="my-4">
+  <p>Para ir a login puedes presionar el boton.</p>
+  <a class="btn btn-primary btn-lg" href="/registrar_cuenta_broker" role="button">Logear</a>
+</div>
+<script>
+    
+    localStorage.removeItem("cuenta");
+    localStorage.removeItem("usuario");
+    localStorage.removeItem("selector");
+     
+    
+   
+</script>
+{% endblock%}

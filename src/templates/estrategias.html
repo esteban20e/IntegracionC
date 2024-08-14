@@ -1,0 +1,163 @@
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+{% for message in messages%}  
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends 'layouts/layoutConexBroker.html'%}
+{% block content%}
+            <div class = 'container p-4'>
+                <div class = "col-md-4 offset-md-4"> 
+                </div> 
+                <div class="row">
+                    <p>Panel de Estrategias.</p>
+                    <div class="d-flex align-items-center mb-3">
+                        
+                        <form action="/estrategia_sheet_WS/" method="POST">
+                            <input type="hidden" name="access_token" id="access_token">
+                            <input type="hidden" name="usuario" id="usuario">
+                            <input type="hidden" name="correo_electronico" id="correo_electronico">
+                            <input type="hidden" name="cuenta" id="cuenta">
+                            <button type="submit" class="btn btn-primary btn-block mr-3" onclick="setLocalStorageValue('MANUAL')">Estrategia Sheet Ws</button>    
+                        </form>
+                        
+                        <a class="btn btn-danger btn-lg d-inline-block ml-2" role="button" onclick="setLocalStorageValue('AUTOMATICO')">RUN</a>
+                
+                        <!-- Mover este formulario dentro del div con clase d-flex -->
+                        <form name="logeo" action="/botonPanico/" method="post" class="btn-guardar_inst ml-2">
+                            <input type="hidden" name="account" id="account">
+                            <button type="submit" class="btn btn-danger my-2">TERMINAR TODO</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center;">
+                    <p style="margin-right: 10px;">Estrategias :</p>
+                    <a class="btn btn-primary btn-lg" href="/estrategia025/" role="button">Estrategia  025. </a>
+                    <a class="btn btn-primary btn-lg m0-2" href="/estrategia026/" role="button">Estrategia  026. </a>
+                    <a class="btn btn-primary btn-lg m0-3" href="/estrategia027/" role="button">Estrategia  027. </a>
+                    <a class="btn btn-primary btn-lg m0-4" href="/estrategia028/" role="button">Estrategia  028. </a>
+                </div>                
+                <div style="display: flex; align-items: center;">
+                    <p style="margin-right: 10px;">Estrategias :</p>
+                    <a class="btn btn-primary btn-lg" href="/estrategia021/" role="button">Estrategia  021. </a>
+                    <a class="btn btn-primary btn-lg ml-2" href="/estrategia022/" role="button">Estrategia  022. </a>
+                    <a class="btn btn-primary btn-lg ml-3" href="/estrategia023/" role="button">Estrategia  023. </a>
+                    <a class="btn btn-primary btn-lg ml-4" href="/estrategia024/" role="button">Estrategia  024. </a>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <p style="margin-right: 10px;">Estrategias :</p>
+                    <a class="btn btn-primary btn-lg" href="/estrategia017/" role="button">Estrategia  017. </a>
+                    <a class="btn btn-primary btn-lg m2-2" href="/estrategia018/" role="button">Estrategia  018. </a>
+                    <a class="btn btn-primary btn-lg m2-3" href="/estrategia019/" role="button">Estrategia  019. </a>
+                    <a class="btn btn-primary btn-lg m2-4" href="/estrategia020/" role="button">Estrategia  020. </a>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <p style="margin-right: 10px;">Estrategias :</p>
+                    <a class="btn btn-primary btn-lg" href="/estrategia013/" role="button">Estrategia  013. </a>
+                    <a class="btn btn-primary btn-lg m3-2" href="/estrategia014/" role="button">Estrategia  014. </a>
+                    <a class="btn btn-primary btn-lg m3-3" href="/estrategia015/" role="button">Estrategia  015. </a>
+                    <a class="btn btn-primary btn-lg m3-4" href="/estrategia016/" role="button">Estrategia  016. </a>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <p style="margin-right: 10px;">Estrategias :</p>
+                    <a class="btn btn-primary btn-lg" href="/estrategia009/" role="button">Estrategia  009. </a>
+                    <a class="btn btn-primary btn-lg m4-2" href="/estrategia010/" role="button">Estrategia  010. </a>
+                    <a class="btn btn-primary btn-lg m4-3" href="/estrategia011/" role="button">Estrategia  011. </a>
+                    <a class="btn btn-primary btn-lg m4-4" href="/estrategia012/" role="button">Estrategia  012. </a>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <p style="margin-right: 10px;">Estrategias :</p>
+                    <a class="btn btn-primary btn-lg" href="/estrategia005/" role="button">Estrategia  005. </a>
+                    <a class="btn btn-primary btn-lg m5-2" href="/estrategia006/" role="button">Estrategia  006. </a>
+                    <a class="btn btn-primary btn-lg m5-3" href="/estrategia007/" role="button">Estrategia  007. </a>
+                    <a class="btn btn-primary btn-lg m5-4" href="/estrategia008/" role="button">Estrategia  008. </a>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <p style="margin-right: 10px;">Estrategias :</p>
+                    <a class="btn btn-primary btn-lg" href="/estrategia001/" role="button">Estrategia  001. </a>
+                    <a class="btn btn-primary btn-lg m6-2" href="/estrategia002/" role="button">Estrategia  002. </a>
+                    <a class="btn btn-primary btn-lg m6-3" href="/estrategia003/" role="button">Estrategia  003. </a>
+                    <a class="btn btn-primary btn-lg m6-4" href="/estrategia004/" role="button">Estrategia  004. </a>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <p style="margin-right: 10px;">Estrategia PcDaniel:</p>
+                    <!-- def estrategyPcDaniel():  esta en estrategias.py -->
+                    <!-- def estrategyPcDaniel():  esta en estrategias.py -->
+                    <a class="btn btn-primary btn-lg" href="/estrategyPcDaniel/" role="button">Estrategia PcDaniel    . </a>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <p style="margin-right: 10px;">Estrategia001:</p>
+                    <!-- def Estrategia_001():   esta en estrategias.py -->
+                    <!-- def Estrategia_001():   esta en estrategias.py -->
+                    <a class="btn btn-primary btn-lg" href="/Estrategia_001/" role="button">Estrategia_001    . </a>
+                </div>
+                
+                <hr style="border-color: white;">
+                <div class = "row">
+                    <div class = "col-md-4">
+                        <!-- Formulario oculto para enviar los datos mediante POST -->
+                        <form id="ruta_de_test_ws" action="/ruta_de_test_ws" method="POST">
+                            <input type="hidden" name="access_token1" id="access_token1">
+                            <input type="hidden" name="usuario1" id="usuario1">
+                            <input type="hidden" name="correo_electronico1" id="correo_electronico1">
+                            <input type="hidden" name="cuenta1" id="cuenta1">
+                            <!-- Agregar el botón de Bootstrap que dice TEST -->
+                            <button type="button" class="btn btn-primary mb-2" onclick="submitForm()">TEST</button>
+                        </form>
+                            <!-- Nuevo formulario oculto para el nuevo botón, sin enviar datos pero con método POST -->
+                        <form id="nueva_ruta" action="/nueva_ruta" method="POST">
+                            <input type="hidden" name="access_token1" id="access_token1">
+                            <!-- Agregar el nuevo botón de Bootstrap -->
+                            <button type="button" class="btn btn-secondary mb-2" onclick="submitNuevoForm()">NUEVO</button>
+                        </form>
+                        
+                    </div>
+                    <div class = "col-md-4">   
+                        <form action="/detenerWS/" method="post">
+                            <input type="hidden" name="usuario_id" id="usuario_id">
+                            <button type="submit" class="btn btn-primary btn-lg">DETENER Web Socket</button>
+                        </form>
+                
+                    </div>    
+                </div> 
+            
+
+        <script>
+            var refresh_token = localStorage.getItem('access_token');
+            correo_electronico = localStorage.getItem('correo_electronico');
+            var cuenta = localStorage.getItem("cuenta");
+            var usuario = localStorage.getItem("usuario");
+            document.getElementById("cuenta").value = cuenta
+            document.getElementById("usuario").value = usuario
+            document.getElementById("correo_electronico").value = correo_electronico
+            document.getElementById("access_token").value = access_token
+            document.getElementById("cuenta1").value = cuenta
+            document.getElementById("usuario1").value = usuario
+            document.getElementById("correo_electronico1").value = correo_electronico
+
+            document.getElementById("access_token1").value = access_token
+            document.getElementById("usuario_id").value = usuario;
+            function setLocalStorageValue(value) {
+                localStorage.setItem('inicio_automatico', value);
+            }
+
+            document.getElementById("account").value = cuenta;
+
+            function submitForm() {
+                document.getElementById("ruta_de_test_ws").submit();
+            }
+            function submitNuevoForm() {
+                document.getElementById("access_token1").value = "1234";
+                document.getElementById("nueva_ruta").submit();
+                
+
+            }
+        </script>
+    </div>
+{%endblock%}
+       

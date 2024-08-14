@@ -1,0 +1,153 @@
+/* Estilos del botón */
+#boton-automatico-estrategia-usuario {
+    display: inline-block;
+    width: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+    height: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+    line-height: 20px; /* Centra el texto verticalmente dentro del botón */
+    font-size: 16px;
+    border: none;
+    border-radius: 50%; /* Hace que el botón sea redondo */
+    color: #fff;
+    background-color: #4CAF50; /* Color verde */
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  /* Estilo al pasar el cursor por encima del botón */
+  #boton-automatico-estrategia-usuario:hover {
+    background-color: #456ca0; /* Color verde más oscuro al pasar el cursor */
+  }
+
+  /* Estilos del botón */
+#boton-manual-estrategia-usuario {
+    display: inline-block;
+    width: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+    height: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+    line-height: 20px; /* Centra el texto verticalmente dentro del botón */
+    font-size: 16px;
+    border: none;
+    border-radius: 50%; /* Hace que el botón sea redondo */
+    color: #fff;
+    background-color: #0d33df; /* Color verde */
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+
+  /* Estilo al pasar el cursor por encima del botón */
+  #boton-manual-estrategia-usuario:hover {
+    background-color: #4595a0; /* Color verde más oscuro al pasar el cursor */
+  }
+
+  /* Estilos del botón */
+#boton-automatico-estrategia-usuario {
+    display: inline-block;
+    width: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+    height: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+    line-height: 20px; /* Centra el texto verticalmente dentro del botón */
+    font-size: 16px;
+    border: none;
+    border-radius: 50%; /* Hace que el botón sea redondo */
+    color: #fff;
+    background-color: #4CAF50; /* Color verde */
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  /* Estilo al pasar el cursor por encima del botón */
+  #boton-automatico-estrategia-usuario:hover {
+    background-color: #456ca0; /* Color verde más oscuro al pasar el cursor */
+  }
+
+  /* Estilos del botón */
+#boton-manual-estrategia-usuario {
+    display: inline-block;
+    width: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+    height: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+    line-height: 20px; /* Centra el texto verticalmente dentro del botón */
+    font-size: 16px;
+    border: none;
+    border-radius: 50%; /* Hace que el botón sea redondo */
+    color: #fff;
+    background-color: #0d33df; /* Color verde */
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+
+  /* Estilo al pasar el cursor por encima del botón */
+  #boton-manual-estrategia-usuario:hover {
+    background-color: #4595a0; /* Color verde más oscuro al pasar el cursor */
+  }
+  
+
+
+  /* Estilos del botón */
+#boton-automatico-estrategia-usuario-noadmin {
+  display: inline-block;
+  width: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+  height: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+  line-height: 20px; /* Centra el texto verticalmente dentro del botón */
+  font-size: 16px;
+  border: none;
+  border-radius: 50%; /* Hace que el botón sea redondo */
+  color: #fff;
+  background-color: #4CAF50; /* Color verde */
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Estilo al pasar el cursor por encima del botón */
+#boton-automatico-estrategia-usuario-noadmin:hover {
+  background-color: #456ca0; /* Color verde más oscuro al pasar el cursor */
+}
+
+/* Estilos del botón */
+#boton-manual-estrategia-usuario-noadmin {
+  display: inline-block;
+  width: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+  height: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+  line-height: 20px; /* Centra el texto verticalmente dentro del botón */
+  font-size: 16px;
+  border: none;
+  border-radius: 50%; /* Hace que el botón sea redondo */
+  color: #fff;
+  background-color: #0d33df; /* Color verde */
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+
+/* Estilo al pasar el cursor por encima del botón */
+#boton-manual-estrategia-usuario-noadmin:hover {
+  background-color: #4595a0; /* Color verde más oscuro al pasar el cursor */
+}
+
+/* Estilos del botón */
+#boton-panico-estrategia-usuario-noadmin {
+  display: inline-block;
+  width: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+  height: 40px; /* Ajusta el tamaño del botón según tus preferencias */
+  line-height: 20px; /* Centra el texto verticalmente dentro del botón */
+  font-size: 16px;
+  border: none;
+  border-radius: 50%; /* Hace que el botón sea redondo */
+  color: #284fd1;
+  background-color: #d1284c; /* Color verde */
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+/* Estilo al pasar el cursor por encima del botón */
+#boton-panico-estrategia-usuario-noadmin:hover {
+  background-color: #115301; /* Color verde más oscuro al pasar el cursor */
+}

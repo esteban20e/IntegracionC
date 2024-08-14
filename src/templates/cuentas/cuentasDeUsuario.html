@@ -1,0 +1,176 @@
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% extends 'layouts/layout.html' %}
+
+
+
+{% block content %}
+
+  <div class="container p-4" id="contenido" style="display:none">
+    <h1 name="mensaje_correo_electronico" id="mensaje_correo_electronico"></h1>
+    <table class="table table-dark table-striped">
+      <thead>           
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Usuario</th>
+          <th scope="col">Cuenta</th>  
+          <th scope="col">Password</th>  
+          <th scope="col">Tipo</th>                                                     
+          <th scope="col">Select Account</th>
+          <th scope="col">Quitar</th>                                                                         
+        </tr>            
+      </thead>
+      <tbody>
+        {% for dato in datos %}
+         {% if dato.userCuenta %}
+            <tr class="table-row">
+                <th scope="row">{{ dato.id }}</th>
+                <th scope="row">{{ dato.userCuenta }}</th> 
+                <th scope="row">{{ dato.accountCuenta }}</th>
+                <th scope="row">{{ dato.passwordCuenta }}</th> 
+                <th scope="row">{{ dato.selector }}</th> 
+                <td>
+                <form  id="splash-form" action="/loginExtCuentaSeleccionadaBroker" method="POST">
+                    <div class="form-group"><input type="hidden" name="selectorEnvironment" id="selectorEnvironment"  value="{{ dato.selector }}" class="form-control"></div>                    
+                    <div class="form-group"><input type="hidden" name="usuario" id="usuario" value="{{ dato.userCuenta }}" class="form-control"></div>                               
+                    <div class="form-group"><input type="hidden" name="contraseña" id="contraseña"value="{{ dato.passwordCuenta }}" class="form-control"></div>                               
+                    <div class="form-group"><input type="hidden" name="cuenta" id="cuenta" placeholder="cuenta" value="{{ dato.accountCuenta }}" class="form-control"></div>                               
+                    <div class="form-group"><input type="hidden" name="access_token"  id="access_token"  class="form-control"></div>                               
+                    <div class="form-group"><input type="hidden" name="idusuario" id="idusuario" value="{{ current_user.id }}" class="form-control"></div> 
+                    <div class="form-group"><input type="hidden" name="origin_page" value="cuentasDeUsusario"></div> 
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary btn-sm btn-block form-control" >This</button>
+                    </div>
+                    
+                </form>
+                </td> 
+                <td>
+                <form action="/delete_cuenta_usuario_broker" method="POST">
+                    <div class="form-group"><input type="hidden" name="id" placeholder="escribe cuenta" value="{{ dato.id }}" class="form-control"></div>                               
+                    <div class="form-group"><button type="submit" class="btn btn-secondary btn-sm btn-block form-control">Quitar</button></div>
+                </form>
+                </td>
+            </tr>  
+          {% endif %}
+        {% endfor %}
+        <script>  
+
+          
+         document.addEventListener('DOMContentLoaded', function() {
+
+          //esto es para enviar el formulario pero primero llama a splash
+          document.getElementById('splash-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita que el formulario se envíe automáticamente
+    
+            // Muestra la página de splash
+            document.getElementById('splash').style.display = 'block';
+            document.getElementById('contenido').style.display = 'none';
+            // Envía el formulario
+            this.submit();
+        });
+
+
+
+
+          localStorage.setItem('paisSeleccionado','argentina');
+           //en este script cargo el correo electronico almacenado en el localStorage 
+           access_token = localStorage.getItem("access_token")  
+           refresh_token = localStorage.getItem('refresh_token');
+           correo_electronico = localStorage.getItem('correo_electronico');
+           cuenta = localStorage.getItem("cuenta");
+           usuario = localStorage.getItem("usuario");
+        
+         
+           simuladoOproduccion = localStorage.getItem("selector");
+           document.getElementById("access_token").value = access_token;   
+           let enlace_correo = "<a href='mailto:" + correo_electronico + "' style='text-decoration:none'>" + correo_electronico + "</a>";
+           let mensaje_correo_electronico = document.getElementById("mensaje_correo_electronico");
+           if (mensaje_correo_electronico) {
+              mensaje_correo_electronico.innerHTML = enlace_correo;
+              
+            }
+
+            //LLAMA A PANTALL splash
+            if (cuenta) { document.getElementById("splash").style.display = "block"; }else{
+                          document.getElementById("contenido").style.display = "block"; }
+            // Resto del código que manipula el DOM o eventos
+         // });
+          
+         
+         
+          var access_token_inputs = document.querySelectorAll("input[name='access_token']");
+          access_token_inputs.forEach(function(input) {
+            input.value = access_token;
+          });
+          localStorage.setItem('hasVisited', 'false'); // Marcar como visitado el panelDeControlBroker
+          
+
+
+
+          if (access_token) { // Verificar si el token existe en el localStorage
+            //document.getElementById("splash").style.display = "block";
+            // Enviar una solicitud a la ruta Flask y pasar el token como parte del cuerpo de la solicitud en formato JSON
+            $.ajax({
+              type: "POST",
+              url: "{{ url_for('get_login.loginExtAutomatico') }}",
+              contentType: "application/json",
+              data: JSON.stringify({
+                'origin_page': 'cuentasDeUsusario',
+                'access_token': access_token,
+                'refresh_token': refresh_token,
+                'correo_electronico': correo_electronico,
+                'cuenta': cuenta,
+                'usuario': usuario,
+                'simuladoOproduccion': simuladoOproduccion // Incluye simuladoOproduccion en la solicitud AJAX
+              }),
+              success: function(response) {
+                if (response.redirect) {
+                  document.getElementById("splash").style.display = "none";
+                  document.getElementById("contenido").style.display = "block";
+                  window.location.href = response.redirect;
+                 
+              
+                } else {
+                  // handle error
+                  showError("No se pudo redirigir al usuario se debe ingresar el usario de broker");
+                }
+              },
+              error: function(error) {
+                // handle error
+                showError("Hubo un error en la solicitud AJAX");
+              }
+            });
+          }
+
+          
+          function showError(message) {
+            // Obtén el elemento donde deseas mostrar el mensaje de error
+            var errorElement = document.getElementById('error-message');
+          
+            // Verifica si el elemento existe
+            if (errorElement) {
+              // Actualiza el contenido del elemento con el mensaje de error
+              errorElement.textContent = message;
+              // Muestra el elemento (puede ser un elemento de alerta, un div, etc.)
+              errorElement.style.display = 'block';
+            } else {
+              // Si el elemento no existe, simplemente muestra una alerta
+              alert(message);
+            }
+          }
+          
+         });
+        </script>
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

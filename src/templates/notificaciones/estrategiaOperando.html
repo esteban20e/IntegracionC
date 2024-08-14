@@ -1,0 +1,33 @@
+{% extends "layouts/layoutConexBroker.html" %}
+{% block content %}
+
+<div class="jumbotron">
+  <h1 class="display-4">Estrategia operando Bot420</h1>
+  <p class="lead">EN CUALQUIER MOMENTO PUEDE DETENER EL WEBSOCKET</p>
+  <hr class="my-4">
+  <p>Para detener el WEBSOCKET PRESIONE EL BOTON.</p>
+  <a class="btn btn-primary btn-lg" href="/detenerWS/" role="button">DETENER</a>
+  <hr class="my-4">
+
+  <p>Para detener todas las operaciones PRESIONE EL BOTON DE PANICO.</p>
+  <form  name="logeo" action="/botonPanico/" method="post" class="btn-guardar_inst">    
+     
+      <div class="col">           
+        <button type="submit" class="btn btn-primary my-2">TERMINAR TODO</button>
+      </div>
+  </form>
+
+  <hr class="my-4">
+  <p>Para ir a estrategias puedes presionar el boton.</p>  
+  <a class="btn btn-primary btn-lg" href="/inicioEstrategias" role="button">Estrategias</a>
+
+
+    <script>
+      cuenta = localStorage.getItem("cuenta");
+     
+      document.getElementById("account").value = account;
+
+    </script>
+</div>
+
+{% endblock%}

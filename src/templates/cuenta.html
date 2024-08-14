@@ -1,0 +1,48 @@
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+{% for message in messages%}  
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends 'layouts/layoutConexBroker.html'%}
+{% block content%}
+
+            <div class = 'container p-4'>                
+                  <div class = 'container p-4'>
+                  <table class="table table-dark table-striped">
+                    <thead>           
+                        <tr>
+                            <th scope="col">accountName</th>
+                            <th scope="col">margin</th>
+                            <th scope="col">availableToCollateral</th>
+                            <th scope="col">available</th>
+                            <th scope="col">ARS</th>
+                            <th scope="col"> USD D</th>                           
+                            <th scope="col">total</th>
+                            <th scope="col">currentCash</th>
+                                                    
+                        </tr>            
+                    </thead>
+                    <tbody>
+                      
+                     
+                        <tr>
+                            <th scope="row">{{datos.accountName}}</th>
+                            <td>{{datos.margin}}</td>
+                            <td>{{datos.availableToCollateral}}</td>  
+                            <td>{{datos.ARSBCRA}}</td>
+                            <td>{{datos}}</td>
+                           
+                          </tr>  
+                       
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{%endblock%}
+ 

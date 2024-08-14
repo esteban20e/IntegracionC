@@ -1,0 +1,360 @@
+{% extends 'layouts/layout_index.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <div class="horizontal-padding vertical-padding">
+          <section class="planes mt-4" id="planes">
+            <div class="planes-info d-flex align-items-center justify-content-center flex-column text-center">
+              <h4 class="planes-titulo" style="color:gold; font-size: 24px;">OFERTAS DE INVERSION</h4> 
+              <h1 class="planes-descripcion" style="color:white; font-size: 32px;">Invierte En Nuestras Estrategias <br> HOY!</h1>
+              <h6 class="planes-descripcion" style="color:white; font-size: 14px; line-height: 1.5;">
+                DPI ofrece múltiples planes de inversión, ofrecemos inversiones desde <br>
+                1000 USD! <br>
+                Aceptamos múltiples formas de pago <br>
+                ¡Invierte hoy en tu FUTURO!
+              </h6>
+              <div class="container-fluid" id="cardIndex">
+                <div class="container py-4 row justify-content-center m-auto">
+                  <div class="row py-3 justify-content-center">
+                    <div class="col-md-6 p-4 card card-body cardIndexPlanes">                    
+                      <h2>Motor De Operaciones</h2>
+                      <h4 class="planes-titulo" style="color: gold; font-size: 24px;">$ 10000 - 99999 </h4>
+                      <h4 class="planes-titulo" style="color: white; font-size: 24px;">2.5% <span class="planes-sub-titulo" style="color: white; font-size: 18px;">Mensual</span></h4>
+                      <hr class="separator">
+                      <p style="margin-bottom: 5px;">Beneficios por año</p>
+                      <p style="margin-bottom: 5px;">Retorno de capital: <span style="color: white; background-color: green; border-radius: 5px; font-size: 14px; padding-left: 10px; padding-right: 10px;">Yes</span></p>
+                      <p style="margin-bottom: 5px;">Total 300 % + <span style="color: white; background-color: green; border-radius: 5px; font-size: 14px; padding-left: 10px; padding-right: 10px;">Capital</span></p>
+                      <div class="card-corner-band">
+                          <div class="card-corner-text">NUEVO</div>
+                      </div>                 
+                      <button class="card-button" style="margin-top: 20px;">Ver más</button>
+                    </div>
+                
+                    <div class="col-md-6 card card-body cardIndexPlanes">
+                      <h2>Bot automático</h2>
+                      <h4 class="planes-titulo" style="color:gold; font-size: 24px;">$ 10000 - 99999</h4> 
+                      <h4 class="planes-titulo" style="color: white; font-size: 24px;">2% <span class="planes-sub-titulo" style="color: white; font-size: 18px;">Mensual</span></h4> 
+                      <hr class="separator">
+                      <p style="margin-bottom: 5px;">Beneficios por mes</p>
+                      <p style="margin-bottom: 5px;">Retorno de capital: <span style="color: white; background-color: green; border-radius: 5px; font-size: 14px; padding-left: 10px; padding-right: 10px;">Yes</span></p>
+                      <p style="margin-bottom: 5px;">Total 24 % + <span style="color: white; background-color: green; border-radius: 5px; font-size: 14px; padding-left: 10px; padding-right: 10px;">Capital</span></p>
+                      <div class="card-corner-band">
+                          <div class="card-corner-text">NUEVO</div>
+                      </div>                 
+                      <button class="card-button" style="margin-top: 20px;">Ver más</button>
+                    </div>
+                  </div>
+                  <div class="row py-3 justify-content-center">  
+                    <div class="col-md-6 card card-body cardIndexPlanes">
+                      <h2>Planilla Manual</h2>
+                      <h4 class="planes-titulo" style="color:gold; font-size: 24px;">$ 10000 - 99999</h4> 
+                      <h4 class="planes-titulo" style="color: white; font-size: 24px;">1.65% <span class="planes-sub-titulo" style="color: white; font-size: 18px;">Mensual</span></h4>
+                      <hr class="separator">
+                      <p style="margin-bottom: 5px;">Beneficios por mes</p>
+                      <p style="margin-bottom: 5px;">Retorno de capital: <span style="color: white; background-color: red; border-radius: 5px; font-size: 14px; padding-left: 10px; padding-right: 10px;">No</span></p>
+                      <p style="margin-bottom: 5px;">Total 20.04%</p>
+                      <div class="card-corner-band">
+                          <div class="card-corner-text">NUEVO</div>
+                      </div>                 
+                      <button class="card-button" style="margin-top: 20px;">Ver más</button>
+                    </div>
+  
+                    <div class="col-md-6 card card-body cardIndexPlanes">
+                      <h2>Tokens</h2>
+                      <h4 class="planes-titulo" style="color:gold; font-size: 24px;">$ 0.65 %</h4> 
+                      <h4 class="planes-titulo" style="color: white; font-size: 24px;">0.65% <span class="planes-sub-titulo" style="color: white; font-size: 18px;">Por token</span></h4>
+                      <hr class="separator">
+                      <p style="margin-bottom: 5px;">Beneficios por mes</p>
+                      <p style="margin-bottom: 5px;">Retorno de capital: <span style="color: white; background-color: green; border-radius: 5px; font-size: 14px; padding-left: 10px; padding-right: 10px;">Yes</span></p>
+                      <p style="margin-bottom: 5px;">Total 20.04 % + <span style="color: white; background-color: green; border-radius: 5px; font-size: 14px; padding-left: 10px; padding-right: 10px;">Capital</span></p>
+                      <div class="card-corner-band">
+                          <div class="card-corner-text">NUEVO</div>
+                      </div>                 
+                      <button class="card-button" style="margin-top: 20px;">Ver más</button>
+                    </div>
+                  </div>
+                  <div class="row py-3 justify-content-center">  
+                    <div class="col-md-6 card-body cardIndexPlanes">
+                      <h2>Cursos</h2>
+                      <h4 class="planes-titulo" style="color:gold; font-size: 24px;">$ 10000 - 99999</h4> 
+                      <h4 class="planes-titulo" style="color: white; font-size: 24px;">1.65% <span class="planes-sub-titulo" style="color: white; font-size: 18px;">Mensual</span></h4>
+                      <hr class="separator">
+                      <p style="margin-bottom: 5px;">Beneficios por mes</p>
+                      <p style="margin-bottom: 5px;">Retorno de capital: <span style="color: white; background-color: green; border-radius: 5px; font-size: 14px; padding-left: 10px; padding-right: 10px;">Yes</span></p>
+                      <p style="margin-bottom: 5px;">Total 20.04 % + <span style="color: white; background-color: green; border-radius: 5px; font-size: 14px; padding-left: 10px; padding-right: 10px;">Capital</span></p>
+                      <div class="card-corner-band">
+                          <div class="card-corner-text">NUEVO</div>
+                      </div>                 
+                      <button class="card-button" style="margin-top: 20px;">Ver más</button>
+                    </div>
+                
+                    <div class="col-md-6 card card-body cardIndexPlanes">
+                      <h2>CF fintech</h2>
+                      <h4 class="planes-titulo" style="color:gold; font-size: 24px;">$ 10000 - 99999</h4> 
+                      <h4 class="planes-titulo" style="color: white; font-size: 24px;">1.65% <span class="planes-sub-titulo" style="color: white; font-size: 18px;">Mensual</span></h4>
+                      <hr class="separator">
+                      <p style="margin-bottom: 5px;">Beneficios por mes</p>
+                      <p style="margin-bottom: 5px;">Retorno de capital: <span style="color: white; background-color: green; border-radius: 5px; font-size: 14px; padding-left: 10px; padding-right: 10px;">Yes</span></p>
+                      <p style="margin-bottom: 5px;">Total 20.04 % + <span style="color: white; background-color: green; border-radius: 5px; font-size: 14px; padding-left: 10px; padding-right: 10px;">Capital</span></p>
+                      <div class="card-corner-band">
+                          <div class="card-corner-text">NUEVO</div>
+                      </div>                 
+                      <button class="card-button" style="margin-top: 20px;">Ver más</button>
+                    </div>
+                  </div>
+                </div>  
+              </div>
+              <div class="horizontal-padding vertical-padding">
+                <section class="sobre-nosotros" id="sobre-nosotros">
+                  <div class="container" id="container-sobre-nosotros">
+                    <h4 class="sobre-nosotros" style="color: gold; font-size: 24px;">SOBRE NOSOTROS</h4>
+                    <h1 class="sobre-nosotros-descripcion" style="color: white; font-size: 32px;">Somos Quant Trading</h1>
+                    <div class="flex-container">
+                      <div class="image-container-sobre-nosotros">
+                        <img src="/static/bitCoinSobreNosotros.jpg" alt="Descripción de la imagen" style="width: 200%; height: auto;">
+                      </div>
+                      <div class="text-container-sobre-nosotros">
+                        <p class="subtitulo">Subtítulo del texto</p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+              
+              <div class="horizontal-padding vertical-padding">
+                <section class="faq mt-5" id="faq">
+                  <div class="faq-info">
+                    <h1 class="faq-titulo" style="color:white"> FAQ </h1>
+                  </div>
+                  <div class="card card-menu cardIndexSobreN" id="sobreNcardId">              
+                    <div class="accordion bg-black" id="accordionSobreN">
+                      <div class="accordion-item" id="accordionSobreN-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button" id="idBotonAcordSN" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Que es DPI Inversiones
+                          </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionSobreN">
+                          <div class="accordion-body">                      
+                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                          </div>
+                        </div>
+                      </div>
+                    </div>              
+                  </div>
+                  
+                  <div class="card card-menu cardIndexSobreN" id="sobreNcardId">              
+                    <div class="accordion bg-black" id="accordionSobreN">
+                      <div class="accordion-item" id="accordionSobreN-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button" id="idBotonAcordSN" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDos" aria-expanded="true" aria-controls="collapseDos">
+                            ¿Como Inicio?
+                          </button>
+                        </h2>
+                        <div id="collapseDos" class="accordion-collapse collapse " data-bs-parent="#accordionSobreN">
+                          <div class="accordion-body">                      
+                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                          </div>
+                        </div>
+                      </div>
+                    </div>              
+                  </div>
+                  
+                  <div class="card card-menu cardIndexSobreN" id="sobreNcardId">              
+                    <div class="accordion bg-black" id="accordionSobreN">
+                      <div class="accordion-item" id="accordionSobreN-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button" id="idBotonAcordSN" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTres" aria-expanded="true" aria-controls="collapseTres">
+                            ¿Que puedes encontrar aqui?
+                          </button>
+                        </h2>
+                        <div id="collapseTres" class="accordion-collapse collapse " data-bs-parent="#accordionSobreN">
+                          <div class="accordion-body">                      
+                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                          </div>
+                        </div>
+                      </div>
+                    </div>              
+                  </div>
+                  
+                  <div class="card card-menu cardIndexSobreN" id="sobreNcardId">              
+                    <div class="accordion bg-black" id="accordionSobreN">
+                      <div class="accordion-item" id="accordionSobreN-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button" id="idBotonAcordSN" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCuatro" aria-expanded="true" aria-controls="collapseTres">
+                            ¿Como te ayudamos?
+                          </button>
+                        </h2>
+                        <div id="collapseCuatro" class="accordion-collapse collapse " data-bs-parent="#accordionSobreN">
+                          <div class="accordion-body">                      
+                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                          </div>
+                        </div>
+                      </div>
+                    </div>              
+                  </div>
+                </section> 
+              </div> 
+
+              <div class="horizontal-padding vertical-padding py-4">
+                <section class="contacto" id="contacto">
+                  <div class="contactos-info">
+                    <h1 class="contactos-titulo" style="color:white"> CONTACTOS </br> TE ASESORAMOS</h1>
+                  </div>
+                </section> 
+              </div>
+
+              <div class="row horizontal-padding vertical-padding py-4">
+                <section class="ingreso" id="ingreso">
+                  <div class="ingreso-info">              
+                    <h1 class="ingreso-titulo">Login</h1>
+                    {% with messages = get_flashed_messages() %}
+                      {% if messages %}
+                        <ul class="flashes">
+                          {% for message in messages %}
+                            <li>{{ message }}</li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    {% endwith %}
+      
+                    <div class="form-container">
+                      <div class="row">
+                          {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                              <div class="alert alert-danger">
+                                {% for message in messages %}
+                                  <p>{{ message }}</p>
+                                {% endfor %}
+                              </div>
+                            {% endif %}
+                          {% endwith %}
+      
+                          <form method="POST" action="{{ url_for('autenticacion.loginUsuario') }}">
+                            <div class="form-group">
+                              <!--<label for="correo_electronico" class="text-white">Correo electrónico:</label>-->
+                              <input type="email" class="form-control mb-3" id="correo_electronico" name="correo_electronico" placeholder="Correo electrónico" required>
+                            </div>
+      
+                            <div class="form-group">
+                              <!--<label for="password" class="text-white">Contraseña:</label>-->
+                              <input type="password" class="form-control mb-3" id="password" name="password" placeholder="Contraseña" required>
+                            </div>
+      
+                            <div class="row justify-content-center">
+                              <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                              </div>
+                              <div class="row col-md-6">
+                                <a href="/registrar_usuario">
+                                <button type="button" class="btn btn-secondary">Registrarse</button></a>
+                              </div>
+                            </div>
+                          </form>
+
+                          <form action="/login/google" method="get" class="mt-4 bts">
+                            <a class="gplogin social"><i class="fa fa-google-plus"></i><span>Iniciar sesión con Google</span></a>
+                            <!--<button type="submit" class="btn btn-primary btn-block my-2">Iniciar sesión con Google</button>-->
+                          </form>
+                      </div>
+                    </div>
+                  </div>
+                </section> 
+              </div>   
+
+
+             </div> <!-- aqui va todo ubicado en el centro es el fin de la etiqueta que contiene al centro--> 
+            
+        <!--</div>  
+         
+            <div >
+              <h1 class="login-titulo" style="color:#000000" > Pie de pagina </br> descripcion de pie de pagina</h1>
+              <h1 style="color:#000000">Pie de pagina</h1>
+            </div>
+          
+       
+      </div>-->
+    </div>
+  </div>  
+
+  {% include 'layouts/layout_footer.html' %}
+
+    <!-- footer anterior  
+    <footer class="footer container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="login-titulo" style="color: #000;">Pie de pagina</h1>
+          <h1 style="color: #000;">descripcion de pie de pagina</h1>-->
+          <!-- Aquí puedes agregar cualquier contenido adicional para el pie de página -->
+        <!--</div>
+      </div>
+    </footer> -->
+
+  
+  <!-- Aquí se agrega el script -->  
+  <script>
+   
+    function showError(message) {
+      // muestra un mensaje de error al usuario
+      alert(message);
+      // o agrega un elemento HTML con el mensaje de error a la página
+      // por ejemplo, con jQuery:
+      // $('body').append('<div class="alert alert-danger">' + message + '</div>');
+    }
+  
+     
+      // Obtener el token del localStorage
+      var token = localStorage.getItem('access_token');
+      var refresh_token = localStorage.getItem('refresh_token');
+      var selectorEnvironment = localStorage.getItem('selector');
+      account =  localStorage.getItem('cuenta');
+      if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const tokenExpirationDate = new Date(payload.exp * 1000);
+        const currentDateTime = new Date();
+        vencimiento_access_token = currentDateTime.getTime() > tokenExpirationDate.getTime();
+      } else {
+      // En caso de que no haya un token
+      //  console.log("No hay token disponible");
+      }  
+      //console.log("tokenExpirationDate: ",tokenExpirationDate," currentDateTime: ",currentDateTime," vencimiento: ",vencimiento_access_token)
+      
+      if (token) { // Verificar si el token existe en el localStorage
+        // Enviar una solicitud a la ruta Flask y pasar el token como parte del cuerpo de la solicitud en formato JSON
+        $.ajax({
+          type: "POST",
+          url: "{{ url_for('autenticacion.loginIndex') }}",
+          contentType: "application/json",
+          data: JSON.stringify({'token': token,'refresh_token':refresh_token,'selectorEnvironment':selectorEnvironment,'account':account}),
+          success: function(response) {
+            if (response.redirect) {
+              window.location.href = response.redirect;
+            } else {
+              // handle error
+              if (vencimiento_access_token){
+                localStorage.removeItem('access_token')
+              }
+              showError("No se pudo redirigir al usuario se puede haber vencido el token loguee nuevamente");
+            }
+          },
+          error: function(error) {
+            // handle error
+            showError("Hubo un error en la solicitud AJAX");
+          }
+        });
+      }
+   
+  </script>
+{% endblock %}

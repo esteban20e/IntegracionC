@@ -1,0 +1,88 @@
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+{% for message in messages%}  
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends 'layouts/layoutConexBroker.html'%}
+{% block content%}
+            <div class = 'container p-4'>
+              <div class="container p-4">
+                <form action="/instrument_by_symbol/" method="POST" id="filterForm">
+                  <input type="text" name="symbol" placeholder="symbol">
+                  <Button type="button" onclick="filterTable()">Submit</Button>
+                </form>
+              </div>
+                  <div class = 'container p-4'>
+                  <table class="table table-dark table-striped">
+                    <thead>           
+                        <tr>
+                        <!--
+                            <th scope="col">Ticker</th>
+                            <th scope="col">Timestamp</th>
+                            <th scope="col">vol. Compra</th>
+                            <th scope="col">precio Compra</th>
+                            <th scope="col">precio Venta</th>
+                            <th scope="col"> Vol. Venta</th>                           
+                            <th scope="col">Ult. Precio Operado</th>
+                        -->   
+                            <th scope="col">Ticker</th>
+                            <th scope="col">maturityDate</th>
+                            <th scope="col">maxTradeVol</th>
+                            <th scope="col">lowLimitPrice</th>
+                            <th scope="col">highLimitPrice</th>
+                            <th scope="col"> minTradeVol</th>                           
+                            <th scope="col">priceConvertionFactor</th>
+                            <th scope="col">Suscribir</th>                            
+                        </tr>            
+                    </thead>
+                    <tbody>
+                      <tbody>
+                        {% for dato in datos%}
+                          <tr data-symbol="{{dato.instrumentId.symbol}}">
+                            <th scope="row">{{dato.instrumentId.symbol}}</th>
+                            <td>{{dato.maturityDate}}</td>
+                            <td>{{dato.maxTradeVol}}</td>
+                            <td>{{dato.lowLimitPrice}}</td>
+                            <td>{{dato.highLimitPrice}}</td>
+                            <td>{{dato.minTradeVol}}</td>
+                            <td>{{dato.priceConvertionFactor}}</td>
+                            <td>
+                              <form action="/SuscripcionWs/" method="POST">
+                                <div class="form-group"><input type="hidden" name="symbol" placeholder="escribe simbolo" value="{{dato.instrumentId.symbol.replace(" ", "*")}}" class="form-control"></div> 
+                                <div class="form-group"><Button type="submit" class="btn btn-primary btn-sm btn-block form-control" >Submit</Button>
+                              </form>
+                            </td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                      
+                      <script>
+                        function filterTable() {
+                          // Obtén el valor del input con name="symbol"
+                          const symbolInput = document.querySelector('input[name="symbol"]');
+                          const symbolToFilter = symbolInput.value.toLowerCase(); // Convierte a minúsculas para una búsqueda sin distinción entre mayúsculas y minúsculas
+                        
+                          // Recorre las filas de la tabla y muestra/oculta según la búsqueda parcial
+                          const rows = document.querySelectorAll('tbody tr');
+                          rows.forEach(row => {
+                            const symbolInRow = row.getAttribute('data-symbol').toLowerCase(); // Convierte a minúsculas
+                            if (symbolInRow.includes(symbolToFilter) || symbolToFilter === "") {
+                              row.style.display = ""; // Muestra la fila
+                            } else {
+                              row.style.display = "none"; // Oculta la fila
+                            }
+                          });
+                        }
+                      </script>
+                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{%endblock%}
+       

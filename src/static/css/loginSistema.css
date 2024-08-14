@@ -1,0 +1,69 @@
+.form-container {
+    margin: 5% auto;
+    display: block;
+    text-align:center;
+    width: 300px;
+  }
+
+.social{
+    transition: background 200ms ease-in-out 0s;
+    -webkit-transition: background 200ms ease-in-out 0s;
+    -moz-transition: background 200ms ease-in-out 0s;
+    -o-transition: background 200ms ease-in-out 0s;
+    -ms-transition: background 200ms ease-in-out 0s;
+    
+    margin-top: 12px;
+    -webkit-border-top-left-radius:1px;
+    -moz-border-radius-topleft:1px;
+    border-top-left-radius:1px;
+    -webkit-border-top-right-radius:1px;
+    -moz-border-radius-topright:1px;
+    border-top-right-radius:1px;
+    -webkit-border-bottom-right-radius:1px;
+    -moz-border-radius-bottomright:1px;
+    border-bottom-right-radius:1px;
+    -webkit-border-bottom-left-radius:1px;
+    -moz-border-radius-bottomleft:1px;
+    border-bottom-left-radius:1px;
+    text-indent:0;
+    display:block;
+    color:#ffffff;
+    height:50px;
+    line-height:50px;
+    width: 100%;
+    text-decoration:none;
+    text-align:center;
+  }
+
+  .gplogin {  
+    background-color:#086d3e; 
+  }
+
+  .gplogin:hover {
+    background-color:#15b484;
+  }
+  .gplogin:active {
+    position:relative;
+    top:1px;
+  }
+
+  .bts i{ 
+    margin: 15px 15px 15px 20px;
+    float: left;
+    width: 5%;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.bts a:hover{
+    text-decoration: none;
+    color: white;
+  }
+  .bts a:active{
+    color: white;
+    text-decoration: none;
+  }
+  .bts a:focus{
+    text-decoration: none;
+    color: white;
+  }

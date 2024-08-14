@@ -1,0 +1,75 @@
+
+{% block content %}
+<div>
+  
+
+  <div class="image-grid">
+    {% for imagen in imagenes %}
+    <div class="card">
+      <div class="card-header">
+        <p style="color: black;">{{ imagen.correo_electronico }}</p>
+        <button class="close-card" onclick="cerrarTarjeta(this.parentElement.parentElement)">X</button>
+      </div>
+      <div class="card-body">
+        <img src="{{ url_for('static', filename=imagen.image_paths) }}" alt="Imagen">
+       </div>
+      <div class="card-footer">
+        <p style="color: black;"> {{ imagen.description }}</p> <!-- Reemplaza con la descripción real de la imagen -->
+        <div style="display: flex; justify-content: space-between;">
+        <button class="despliegue-card" onclick="abrirModal()">&gt;</button>
+          <!-- Agregar el nuevo botón aquí -->
+          <button class="tu-clase" onclick="tuFuncion()" style="display: block; margin: 0 auto; border: none; border-radius: 10px; padding: 10px 20px;">enviale un mensaje</button>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  
+  </div>
+</div>
+
+<!-- ... Tu código HTML ... -->
+
+<script>
+  function eliminarImagen(imageName) {
+    // Mostrar un cuadro de confirmación antes de proceder
+    var confirmarEliminacion = confirm('¿Estás seguro de que deseas eliminar esta imagen?');
+
+    if (confirmarEliminacion) {
+      var accessToken = localStorage.getItem('access_token');
+      var randomNumber = Math.round(Math.random() * 1000000);
+
+      $.ajax({
+        url: '/eliminarImagen',
+        type: 'POST',
+        data: {
+          randomNumber: randomNumber,
+          imageName: imageName,
+          // Otros datos si es necesario
+        },
+        headers: {
+          'Authorization': 'Bearer ' + accessToken
+        },
+        success: function(response) {
+          console.log('Imagen eliminada con éxito:', response);
+          $('#result').html('Imagen eliminada con éxito. Respuesta del servidor: ' + response);
+
+          // Puedes realizar otras acciones después de eliminar la imagen, como actualizar la interfaz de usuario.
+        },
+        error: function(error) {
+          $('#result').html('Error al eliminar la imagen. Detalles: ' + JSON.stringify(error));
+        }
+      });
+    } else {
+      // El usuario canceló la eliminación
+      console.log('Eliminación cancelada por el usuario.');
+    }
+  }
+
+  function cerrarTarjeta(card) {
+    card.style.display = 'none';
+  }
+</script>
+
+<!-- ... Más código HTML ... -->
+
+{% endblock %}

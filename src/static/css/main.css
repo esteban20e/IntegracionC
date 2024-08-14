@@ -1,0 +1,47 @@
+body {
+  background: #24006c;
+  color: #fff;
+}
+.container {
+  background: rgb(84, 6, 167);
+}
+
+#mensaje_correo_electronico {
+  font-size: small;
+  
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+#mensaje_cuentaBroker {
+  font-size: small;  
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+#mensaje_simulado {
+  font-size: small; 
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+#modal {
+  display: none; /* Ocultar el modal de forma predeterminada */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+}
+
+.dz-message {
+    text-align: center;
+    margin: 20px 0;
+}
+
+
+.nav-link.active {
+  /*/background-color: #007bff; /* Color de fondo para elementos activos */
+  color: #ec1919; /* Color de texto para elementos activos */
+}
+
+.nav-link {
+  /*background-color: #f8f9fa; /* Color de fondo para elementos inactivos */
+  color:  rgb(128, 128, 128); /* Color de texto para elementos inactivos */
+}
+

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--BOOSTRAP 5.1.3-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous">
+    <!-- dropzone -->
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+    <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+    <!--CSS PERSONALIZADO -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon.png') }}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js" integrity="sha512-xbQU0+iHqhVt7VIXi6vBJKPh3IQBF5B84sSHdjKiSccyX/1ZI7Vnkt2/8y8uruj63/DVmCxfUNohPNruthTEQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/static/js/actualizaTabla.js"></script>
+    <title>logeado en Broker</title>
+    <meta name="google-signin-client_id" content="TU_CLIENTE_ID_DE_GOOGLE">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ url_for('static', filename='js/notificacionAlertOperacion.js') }}"></script>
+    <!--esto es para los colores-->
+    <!-- Include the Pickr library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr@^1.7.0/dist/themes/classic.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr@^1.7.0/dist/pickr.min.js"></script>
+    <!--CSS PERSONALIZADO -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/PanelControlUsuarioBroker/estrategiaUsuarios.css') }}">
+    <link rel =  "stylesheet" href = {{ url_for('static',filename='css/tarjetasFichas.css')}}>
+    <link rel =  "stylesheet" href = {{ url_for('static',filename='css/splashPages/splash.css')}}>
+    
+</head>
+
+<body>
+    <!-- As a heading -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <h1 id="mensaje_correo_electronico" name="mensaje_correo_electronico" ></h1>
+            <h1 id="mensaje_cuentaBroker" name="mensaje_cuentaBroker" href="/loginApi" id="mensaje_cuentaBroker"></h1>
+            <h1 id="mensaje_simulado" name="mensaje_simulado"  id="mensaje_simulado"></h1>
+           
+           
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarNav" >
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                      
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Administracion</a>
+                        <ul class="dropdown-menu">            
+                          <li><a class="dropdown-item" href="/usuarios/" >Usuarios</a></li>  
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/cuentas-Usuario-Broker/">Cuentas</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/estrategias-usuario-general/">Estrategias</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/SuscripcionPorWebSocket/">Procesos</a></li>                          
+                        </ul>
+                        
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link active" aria-current="page" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Subir</a>
+                        <ul class="dropdown-menu">              
+                                     
+                          <li><a class="dropdown-item" href="/subirImagen/" >Imagen</a></li>  
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/subirVideo/">Video</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/SuscripcionPorWebSocket/">Live</a></li>                          
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Fichas</a>
+                        <ul class="dropdown-menu">              
+                            <form  name="fichasToken_fichas_generar" action="/fichasToken_fichas_generar" method="post" class="btn-guardar_inst">
+                                <div class="form-group"><input type="hidden" name="access_token_form_GenerarFicha"  id="access_token_form_GenerarFicha"  class="form-control"></div>  
+                                <div class="form-group"><input type="hidden" name="layoutOrigen"  id="layoutOrigen"  class="form-control" value='layoutConexBroker'></div>  
+                          
+                                <div class="col">  
+                                    <li><button type="submit" class="dropdown-item">Generar</button></li>   
+                                     
+                              </div>
+                            </form>    
+                           
+                          <li><hr class="dropdown-divider"></li>
+
+
+
+                          <form  name="fichasToken_fichas_generar" action="/fichasToken-fichas-listar/" method="post" class="btn-guardar_inst">
+                            <div class="form-group"><input type="hidden" name="access_token_form_ListarFicha"  id="access_token_form_ListarFicha"  class="form-control"></div>  
+                            <div class="form-group"><input type="hidden" name="layoutOrigen"  id="layoutOrigen"  class="form-control" value='layoutConexBroker'></div>  
+                             
+                             <div class="col">  
+                                <li><button type="submit" class="dropdown-item">Listar</button></li>   
+                                 
+                          </div>
+                        </form> 
+                                              
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Paneles</a>
+                        <ul class="dropdown-menu">  
+                            <li><a class="dropdown-item"id="guardarPaisSeleccionado2">signals</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="seleccionarPais('argentina')">Argentina</a></li>                           
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="seleccionarPais('usa')">USA</a></li>
+                          </ul>
+                    </li>
+                    
+                    
+                   
+                    
+                  
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Get Instruments</a>
+                        <ul class="dropdown-menu">                        
+                          <li><a class="dropdown-item" href="/instrumentos_detalles">Instrumentos</a></li>                        
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/suscripcionDb">Listado</a></li>                          
+                        </ul>
+                    </li>
+                     
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Estrategias</a>
+                        <ul class="dropdown-menu ">                        
+                          <li class="w-auto">
+                             <form action="/estrategias-usuario-nadmin" method="POST">
+                                <div class="form-group">
+                                    <input type="hidden" name="access_token_est" id = "access_token_est" class="form-control">
+                                </div>                               
+                                <div class="form-group">
+                                    <button type="submit" class="btn  btn-success btn-sm btn-block form-control w-auto mx-2">Estrategias</button>
+                                </div>
+                             </form>
+                        </li>  
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/trigger/">Automatización</a></li>    
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/inicioEstrategias/">Test</a></li>                          
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/estadoOperacion">Portfolio</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Ordenes</a>
+                        <ul class="dropdown-menu">                        
+                          <li><a class="dropdown-item" href="/estadoOperacion">Estado</a></li>                        
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/operar">Operar</a></li>                          
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Cuenta</a>
+                        <ul class="dropdown-menu">                        
+                          <li><a class="dropdown-item" href="/posicionCuenta">Posicion</a></li>                        
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/detalleCuenta">Detalle</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/reporteCuenta">Reporte</a></li>      
+                          <li><hr class="dropdown-divider"></li>
+                          <form  name="get_cuentas_de_broker_usuario_Abm" action="/get_cuentas_de_broker_usuario_Abm" method="post" class="btn-guardar_inst">
+                            <div class="form-group"><input type="hidden" name="access_token_form_Abm"  id="access_token_form_Abm"  class="form-control"></div>  
+                            
+                            <div class="col">  
+                                <li><button type="submit" class="dropdown-item">Ver Cuentas</button></li>   
+                                 
+                          </div>
+                          </form>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Log Out</a>
+                        <ul class="dropdown-menu">                        
+                          <li><a class="dropdown-item" href="/logOutSystem">exit system</a></li>                        
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/logOutAccount">get out of account</a></li>
+                                                
+                        </ul>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link active" aria-current="page" href="/registrar_usuario">Registrarse</a>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
+   
+
+    <div class = 'container p-4'>
+        
+      {%block content%}
+      {% endblock%}
+       <div class="splash-container" id="splash" style="display:none">
+        {% include 'notificaciones/splashPage.html' %}
+       </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
+    
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+    <script>
+        
+        selectedCountry  = localStorage.getItem('paisSeleccionado');
+        document.getElementById('guardarPaisSeleccionado2').addEventListener('click', function() {
+            var pais = selectedCountry;
+            localStorage.setItem('paisSeleccionado', pais);
+        
+            usuario_id = localStorage.getItem('usuario_id');
+        
+            var layoutOrigen = 'layoutConexBroker';
+            var url = '/panel_control_sin_cuenta?country=' + pais + '&layoutOrigen=' + layoutOrigen+'&usuario_id='+usuario_id;
+            window.location.href = url;
+          }); 
+        
+        
+        
+        
+        
+          function seleccionarPais(pais) {
+            localStorage.setItem('paisSeleccionado', pais);
+        
+            var usuario_id = localStorage.getItem('usuario_id');
+        
+            var layoutOrigen = 'layoutConexBroker';
+            var url = '/panel_control?country=' + pais + '&layoutOrigen=' + layoutOrigen+'&usuario_id='+usuario_id;
+            window.location.href = url;
+        }
+         correo_electronico = localStorage.getItem("correo_electronico");  
+         cuentaBroker = localStorage.getItem("cuenta");  
+         simulado = localStorage.getItem("selector");  
+         access_token = localStorage.getItem("access_token")
+         rol = localStorage.getItem('roll');
+      
+
+        document.getElementById("access_token_form_Abm").value = access_token;
+        document.getElementById("access_token_form_GenerarFicha").value = access_token;
+        document.getElementById("access_token_form_ListarFicha").value = access_token;
+        document.getElementById("access_token_est").value = access_token;
+        
+        
+        if (simulado == 'simulado') {
+             cuenta = "<a  style='text-decoration:none; color:white; '>SIMULADO</a>";
+            document.getElementById("mensaje_simulado").innerHTML = cuenta;
+          
+            let enlace_correo = "<a ' style='text-decoration:none; color:orange;'>" + correo_electronico + "</a>";
+            document.getElementById("mensaje_correo_electronico").innerHTML = enlace_correo;
+
+             mensaje = "<a ' style='text-decoration:none;  color:orange;'>" + cuentaBroker + "</a>";
+            document.getElementById("mensaje_cuentaBroker").innerHTML = mensaje;
+            
+            } else if (simulado == 'produccion') {
+
+             cuenta = "<a style='text-decoration:none; color:orange; '>REAL</a>";
+            document.getElementById("mensaje_simulado").innerHTML = cuenta;
+
+             enlace_correo = "<a ' style='text-decoration:none; color:blue;''>" + correo_electronico + "</a>";
+            document.getElementById("mensaje_correo_electronico").innerHTML = enlace_correo;
+
+             mensaje = "<a ' style='text-decoration:none;  color:blue;'>" + cuentaBroker + "</a>";
+            document.getElementById("mensaje_cuentaBroker").innerHTML = mensaje;
+            } else {
+            // handle the case when the value of simulado is neither '1' nor '2'
+            }
+
+
+                // Verificar si el rol es "administrador"
+        if (rol != 'ADMINISTRADOR') {
+            // Ocultar el enlace del menú de administración
+             adminLink = document.querySelector('.nav-link.dropdown-toggle');
+            adminLink.style.display = 'none';
+        }
+
+
+       
+            // Cerrar el menú desplegable al ser seleccionado
+            cerrarMenuSeleccionado();
+    </script>
+   
+</body>
+</html>

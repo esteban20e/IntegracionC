@@ -1,0 +1,27 @@
+{% extends "layouts/layout.html" %}
+{% block content %}
+
+<div class="jumbotron">
+  <h1 class="display-4">Terminando!, se activó el Botón de panico en Bot420</h1>
+  <p class="lead">Para operar puedes seleccionar la pestaña Estrategias</p>
+  <hr class="my-4">
+  <p>Para ir a estrategias puedes presionar el boton.</p>  
+  <a class="btn btn-primary btn-lg" href="/inicioEstrategias" role="button">Estrategias</a>
+</div>
+<script>
+  
+
+ 
+  
+
+  // Obtener los tokens de localStorage
+  function obtenerTokens() {
+    var access_token = localStorage.getItem('access_token');
+    var refresh_token = localStorage.getItem('refresh_token');
+    return {access_token, refresh_token};
+  }
+
+ 
+
+</script>
+{% endblock%}

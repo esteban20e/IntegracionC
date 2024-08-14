@@ -1,0 +1,113 @@
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% extends 'layouts/layoutConexBroker.html' %}
+
+{% block content %}
+  <div class="container p-4">
+    <h1 name="mensaje_correo_electronico" id="mensaje_correo_electronico"></h1>
+    <table class="table table-dark table-striped">
+      <thead>           
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Usuario</th>
+          <th scope="col">Cuenta</th>  
+          <th scope="col">Password</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Quitar</th>                                                                         
+        </tr>            
+      </thead>
+      <tbody>
+        {% for dato in datos %}
+         {% if dato.userCuenta %}
+            <tr class="table-row">
+                <th scope="row">{{ dato.id }}</th>
+                <th scope="row">{{ dato.userCuenta }}</th> 
+                <th scope="row">{{ dato.accountCuenta }}</th>
+                <th scope="row">{{ dato.passwordCuenta }}</th> 
+                <th scope="row">{{ dato.selector }}</th> 
+                <td>
+                <form action="/delete_cuenta_usuario_broker" method="POST">
+                    <div class="form-group"><input type="hidden" name="id" placeholder="escribe cuenta" value="{{ dato.id }}" class="form-control"></div>                               
+                    <input type="hidden" name="selector" value="{{ dato.selector }}">
+                    <div class="form-group"><button type="submit" class="btn btn-secondary btn-sm btn-block form-control">Quitar</button></div>
+                </form>
+                </td>
+            </tr>  
+          {% endif %}
+        {% endfor %}
+        <script>  
+           //en este script cargo el correo electronico almacenado en el localStorage 
+         
+          document.addEventListener('DOMContentLoaded', function() {
+           
+            access_token = localStorage.getItem("access_token");
+            let correo_electronico = localStorage.getItem("correo_electronico");
+            document.getElementById("access_token").value = access_token;   
+            let enlace_correo = "<a href='mailto:" + correo_electronico + "' style='text-decoration:none'>" + correo_electronico + "</a>";
+            let mensaje_correo_electronico = document.getElementById("mensaje_correo_electronico");
+            if (mensaje_correo_electronico) {
+              mensaje_correo_electronico.innerHTML = enlace_correo;
+            }
+
+            // Resto del código que manipula el DOM o eventos
+          });
+          
+         
+          document.addEventListener('click', function(event) {
+            const target = event.target;
+            if (target && target.matches('.btn-primary')) {
+              event.preventDefault();
+              const form = target.closest('form'); // Encuentra el formulario que contiene el botón clicado
+              const usuarioIDInput = form.querySelector('input[name="idusuario"]'); // Busca el campo 'idusuario' dentro del formulario
+              console.log(usuarioIDInput)
+              if (usuarioIDInput) {
+                const usuarioID = usuarioIDInput.value;
+                localStorage.setItem('usuario_id', usuarioID);
+               
+                // Crear y enviar el formulario de redirección
+                const redirectForm = document.createElement('form');
+                redirectForm.method = 'POST';
+                redirectForm.action = '/loginExtCuentaSeleccionadaBroker';
+      
+                // Crear campos ocultos para enviar los valores
+                const fields = [
+                  { name: 'selectorEnvironment', value: form.querySelector('input[name="selector"]').value },
+                  { name: 'usuario', value: form.querySelector('input[name="usuario"]').value },
+                  { name: 'contraseña', value: form.querySelector('input[name="contraseña"]').value },
+                  { name: 'cuenta', value: form.querySelector('input[name="cuenta"]').value },
+                  { name: 'access_token', value: form.querySelector('input[name="access_token"]').value },
+                  { name: 'usuario_id', value: usuarioID }
+                ];
+      
+                // Agregar los campos ocultos al formulario de redirección
+                fields.forEach(field => {
+                  const input = document.createElement('input');
+                  input.type = 'hidden';
+                  input.name = field.name;
+                  input.value = field.value;
+                  redirectForm.appendChild(input);
+                });
+      
+                // Agregar el formulario de redirección al cuerpo del documento y enviarlo
+                document.body.appendChild(redirectForm);
+                redirectForm.submit();
+              } else {
+                console.error("Error: Input element 'idusuario' not found.");
+              }
+            }
+          });
+        
+        </script>
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

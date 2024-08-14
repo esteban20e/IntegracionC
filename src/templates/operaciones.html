@@ -1,0 +1,61 @@
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+{% for message in messages%}  
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends 'layouts/layoutConexBroker.html'%}
+{% block content%}
+<div class = 'container p-4'>
+    <div class = "col-md-4 offset-md-4">
+        <h1>COMPRAR</H1>
+            <form action="/comprar" method="POST">       
+                <div class="form-group"><input type="text" name="symbol" placeholder="escribe instrumento" class="form-control"> </div>
+                <div class="form-group"><input type="text" name="orderQty" placeholder="escribe cantidad"  class="form-control"> </div>
+                <div class="form-group"><input type="text" name="price" placeholder="escribe precio" class="form-control"> </div>
+                <label><input type="checkbox" name="tipoOrder" value="MARKET">MARKET</label><br>
+                <label><input type="checkbox" name="tipoOrder" value="LIMIT"> <label for="cbox2">LIMIT</label><br>
+                <label><input type="checkbox" name="tipoTrafico" value="REST">REST</label><br>
+                <label><input type="checkbox" name="tipoTrafico" value="WS"> <label for="cbox2">WS</label>
+                <div class="form-group"><Button type="submit" class="btn btn-primary btn-sm btn-block form-control" >Submit</Button>
+            </form>
+    </div> 
+    <div >
+        <h1>VENDER</H1>
+            <form action="/vender/" method="POST"> 
+                <div class="form-group"><input type="hidden" name="clOrdId" placeholder="escribe instrumento" class="form-control"  value = {{datos[0].clOrdId}}> </div>                    
+                <div class="form-group"><input type="hidden" name="proprietary" placeholder="escribe instrumento" class="form-control"  value = {{datos[0].proprietary}}> </div>      
+                <div class="form-group"><input type="text" name="symbol" placeholder="escribe instrumento" class="form-control"  value = {{datos[0].symbol}}> </div>
+                <div class="form-group"><input type="text" name="orderQty" placeholder="escribe cantidad"  class="form-control" value = {{datos[0].orderQty}}> </div>
+                <div class="form-group"><input type="text" name="price" placeholder="escribe precio" class="form-control" value = {{datos[0].price}}> </div>
+                <div class="form-group"><input type="text" name="ordType" placeholder="escribe tipoOrden"  class="form-control" value = {{datos[0].ordType}}> </div>
+                
+                <div 
+                class="form-group"><Button type="submit" class="btn btn-primary btn-sm btn-block form-control" >Submit</Button>
+            </form> 
+    </div> 
+    <div >
+        <h1>MODIFICAR ORDEN</H1>
+           
+           
+            <form action="/comprar" method="POST">  
+                <div class="form-group"><input type="text" name="symbol" placeholder="escribe instrumento" class="form-control"  value = {{datos[0].symbol}}> </div>
+                <div class="form-group"><input type="text" name="orderQty" placeholder="escribe cantidad"  class="form-control" value = {{datos[0].orderQty}}> </div>
+                <div class="form-group"><input type="text" name="price" placeholder="escribe precio" class="form-control" value = {{datos[0].price}}> </div>
+               
+                <div><label><input type="checkbox" name="tipoOrder" value="MARKET">MARKET</label><br></div>
+                <div><label><input type="checkbox" name="tipoOrder" value="LIMIT"> <label for="cbox2">LIMIT</label><br></div>
+                <div><label><input type="checkbox" name="tipoTrafico" value="REST">REST</label><br></div>
+                <div><label><input type="checkbox" name="tipoTrafico" value="WS"> <label for="cbox2">WS</label></div>
+                <div><div class="form-group"><Button type="submit" class="btn btn-primary btn-sm btn-block form-control" >Submit</Button>
+            </form> 
+    </div> 
+    
+</div>
+</div>
+{%endblock%}
+       

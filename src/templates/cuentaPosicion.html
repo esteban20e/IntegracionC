@@ -1,0 +1,54 @@
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+{% for message in messages%}  
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends 'layouts/layoutConexBroker.html'%}
+{% block content%}
+
+            <div class = 'container p-4'>                
+                  <div class = 'container p-4'>
+                  <table class="table table-dark table-striped">
+                    <thead>           
+                        <tr>
+                            <th scope="col">symbolReference</th>
+                            <th scope="col">symbol</th>
+                            <th scope="col">buySize</th>
+                            <th scope="col">buyPrice</th>
+                            <th scope="col">sellSize</th>
+                            <th scope="col">sellPrice</th>
+                            <th scope="col">totalDailyDiff</th>
+                            <th scope="col">totalDiff</th>
+                            <th scope="col">originalBuyPrice</th>
+                            <th scope="col">originalSellPrice</th>
+                        </tr>            
+                    </thead>
+                    <tbody>
+                      
+                     
+                        <tr>
+                            <th scope="row">{{datos[0].instrument.symbolReference}}</th>
+                            <th >{{datos[0].symbol}}</th>
+                            <th >{{datos[0].buySize}}</th>
+                            <th >{{datos[0].buyPrice}}</th>
+                            <th >{{datos[0].sellSize}}</th>
+                            <th >{{datos[0].sellPrice}}</th>
+                            <th >{{datos[0].totalDailyDiff}}</th> 
+                            <th >{{datos[0].totalDiff}}</th>     
+                            <th >{{datos[0].originalBuyPrice}}</th>  
+                            <th >{{datos[0].originalSellPrice}}</th>   
+                            
+                          </tr>  
+                       
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{%endblock%}
+ 

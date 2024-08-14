@@ -1,0 +1,489 @@
+{% extends "layouts/layoutConexBroker.html" %}
+{% block content %}
+
+  
+  <div class = 'container p-4' id="contenido"  style="display:none">   
+    <div class="jumbotron">
+      <h1 class="display-4">Signals!</h1>
+      <p class="lead">To operate you can press the button with the corresponding color</p>
+      <hr class="my-4">
+    
+    </div>
+    <audio id="Campana" src = {{ url_for('static',filename='sonidos/Bell.wav')}} ></audio>
+    <table class="table table-dark table-striped"  id="signalTable">
+      <thead>           
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>         
+          <th></th>
+          <th></th>  
+        </tr>         
+      </thead>
+      <tbody>
+        
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>             
+                <td>CARGANDO DATOS, ESPERE</td>
+                <td></td>   
+              </tr>
+           
+      </tbody>
+    </table>
+    
+        <div class="modal-content" style="color: black;">
+          <form id="registro-usuario-form" action="/operaciones_desde_seniales" method="POST">
+            <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirm Operation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>                                    
+                    <div class="modal-body"><strong>Are you sure you want to perform this operation?</strong><div class="form-group">
+
+                        <input type="hidden" class="form-control" id="access_token" name="access_token">
+                      </div>
+                      <div class="form-group">
+                        <label for="symbol"><strong>Symbol</strong></label>
+                        <input type="text" class="form-control" id="symbol" name="symbol">
+                      </div>
+                      <div class="form-group">                       
+                        <input type="hidden" class="form-control" id="ut" name="ut">
+                      </div>    
+                      <div class="form-group">
+                        <input type="hidden" class="form-control" id="senial" name="senial">
+                      </div>  
+                      <div class="form-group">
+                        <input type="hidden" class="form-control" id="correo_electronico" name="correo_electronico">
+                      </div>  
+                      <div class="form-group">
+                        <input type="hidden" class="form-control" id="paisSeleccionado" name="paisSeleccionado">
+                      </div> 
+
+                      <div class="divRowCompra">
+                        <label class="divCellLabelCompra" for="CantidadMonto"><strong>Cantidad/Monto</strong></label>
+                        <div class="divCellCompra">
+                            <div class="divRowCompra">
+                                <div style="float: left; width: 120px;">
+                                    <input data-val="true" data-val-number="El campo CantidadMonto debe ser un número." data-val-required="Cantidad o Monto es requerido" id="Cantidad" name="CantidadMonto" type="radio" >
+                                    <label for="Cantidad" class="tooltiper" data-original-title="Opciones: Cantidad de Opciones, no cantidad de Lotes." aria-describedby="tooltip607883"><strong>Cantidad</strong></label>
+                                </div>
+                                <input data-val="true" data-val-number="El campo Cantidad debe ser un número." data-val-range="Cantidad debe ser un número válido." data-val-range-max="2147483647" data-val-range-min="0" data-val-regex="Cantidad debe ser un número." data-val-regex-pattern="\d+(?:.\d{1,6})?" data-val-requiredifradiobuttonvalue="El campo Cantidad es obligatorio." data-val-requiredifradiobuttonvalue-boolprop="CantidadMonto" data-val-requiredifradiobuttonvalue-value="2" id="ValorCantidad" maxlength="14" name="ValorCantidad" style="width:100px;" type="text" value="" disabled="">
+                            </div>
+                            <div class="divRowCompra">
+                                <div style="float: left; width: 120px;">
+                                    <input id="Monto" name="CantidadMonto" type="radio" value="1">
+                                    <label for="Monto"><strong>Monto</strong></label>
+                                </div>
+                                <input data-val="true" data-val-number="El campo Monto debe ser un número." data-val-regex="El monto debe ser un número." data-val-regex-pattern="\d+(?:.\d{1,6})?" data-val-requiredifradiobuttonvalue="El campo Monto es obligatorio." data-val-requiredifradiobuttonvalue-boolprop="CantidadMonto" data-val-requiredifradiobuttonvalue-value="1" id="ValorMonto" maxlength="14" name="ValorMonto" style="width:100px;" type="text" value="">
+                            </div>
+                            <small class="error">
+                                <span class="field-validation-valid" data-valmsg-for="CantidadMonto" data-valmsg-replace="true"></span>
+                                <span class="field-validation-valid" data-valmsg-for="ValorMonto" data-valmsg-replace="true"></span>
+                                <span class="field-validation-valid" data-valmsg-for="ValorCantidad" data-valmsg-replace="true"></span>
+                            </small>
+                        </div>
+                    </div>
+
+
+                    <div class="divRowCompra">
+                      <label class="divCellLabelCompra" for="Modalidad"><strong>Modalidad</strong></label>
+                      <div class="divCellCompra">
+                          <div id="divPrecioMercado" class="divRowCompra">
+                              <input data-val="true" data-val-required="Modalidad es requirida" id="PrecioMercado" name="Modalidad" type="radio" value="2">
+                              <label for="PrecioMercado" class="tooltiper" data-original-title="Los títulos se operarán al mejor precio vendedor en ese momento; el inversor no especifica precio" aria-describedby="tooltip476820"><strong>Precio mercado</strong></label>
+                          </div>
+                          <div class="divRowCompra">
+                              <div style="float: left; width: 120px;">
+                                  <input id="PrecioLimite" name="Modalidad" type="radio" value="1">
+                                  <label for="PrecioLimite" class="tooltiper" data-original-title="El inversor selecciona un precio máximo que desea pagar por los títulos" aria-describedby="tooltip423004"><strong>Precio límite</strong></label>
+                              </div>
+                              <input data-val="true" data-val-number="El campo Precio límite debe ser un número." data-val-range="El Precio Limite debe ser un número válido." data-val-range-max="2147483647" data-val-range-min="0" data-val-regex="El precio límite debe ser un número." data-val-regex-pattern="\d+(?:.\d{1,6})?" data-val-requiredifradiobuttonvalue="El campo Precio límite es obligatorio." data-val-requiredifradiobuttonvalue-boolprop="Modalidad" data-val-requiredifradiobuttonvalue-value="1" id="ValorPrecioLimite" maxlength="14" name="ValorPrecioLimite" style="width:100px;" type="text" value="" disabled="">
+                          </div>
+                          <small class="error">
+                              <span class="field-validation-valid" data-valmsg-for="Modalidad" data-valmsg-replace="true"></span>
+                              <span class="field-validation-valid" data-valmsg-for="ValorPrecioLimite" data-valmsg-replace="true"></span>
+                          </small>
+                      </div>
+                  </div>
+
+
+
+
+                                                      
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>      
+                    <button type="submit" id="confirmBtn" class="btn btn-primary my-2" disabled>Confirmar</button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>  
+  </div>  
+<script>
+document.addEventListener('DOMContentLoaded', function() {  
+  document.getElementById('splash').style.display = 'block';
+  //{% if cuenta is defined %}
+  // Acceder a los tokens desde el diccionario de contexto de Flask
+  var cuenta = "{{ cuenta[0] }}";
+  var usuario = "{{ cuenta[1] }}";
+  var selector = "{{ cuenta[2] }}";
+
+  console.log("probanodo",cuenta)
+  console.log(usuario)
+  console.log(selector)
+  // Almacenar los tokens en el localStorage
+  localStorage.setItem("cuenta", cuenta);
+  localStorage.setItem("usuario", usuario);
+  localStorage.setItem("selector", selector);
+  //{% endif %}
+  document.addEventListener('click', function(event) {
+    if (event.target && event.target.id == "boton-despues-carga-tabla") {
+        
+        access_token = localStorage.getItem('access_token');
+        var cuentaEnvioAjax = localStorage.getItem('correo_electronico');
+        var symbol = event.target.dataset.symbol;
+        var senial = event.target.dataset.senial;      
+        var ut = event.target.dataset.ut;
+        var paisS = localStorage.getItem('paisSeleccionado');
+        
+        // Llenar los campos ocultos en el formulario del modal
+        document.getElementById('symbol').value = symbol;
+        document.getElementById('senial').value = senial;     
+        document.getElementById('ut').value = ut;
+        document.getElementById('ValorCantidad').value = ut;
+        document.getElementById('access_token').value = access_token;
+        document.getElementById('correo_electronico').value = cuentaEnvioAjax;
+        document.getElementById('paisSeleccionado').value = paisS;
+        // Cerrar el modal
+        $('#confirmModal').modal('hide');
+    }
+  });
+
+  // Llama a la función de actualización inicial
+  window.addEventListener('load', function() {
+    updateTable();
+  });
+
+  function updateTable() {
+    // Guarda los elementos visibles antes de la actualización
+    // var elementosAntes = obtenerElementos();
+
+  // var cambiosAntes = compararCambios();
+    // Realizar una solicitud AJAX para obtener los nuevos datos
+
+    var paisSeleccionado = localStorage.getItem('paisSeleccionado');
+    var usuario_id = localStorage.getItem('usuario_id');
+    var xhr = new XMLHttpRequest();
+    var url = '/panel_control_atomatico/'+paisSeleccionado+'/'+usuario_id;
+    
+    xhr.open('GET', url, true);
+    //  encabezado Content-Type
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 400) {
+        // La solicitud fue exitosa, actualiza la tabla     
+        var response = JSON.parse(xhr.responseText);
+      
+        var tableBody = document.getElementById('signalTable').getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = ''; // Limpiar el contenido actual de la tabla
+
+        
+      
+      //  var filasCambiadas = comparaFilas(elementosAntes, response);
+        //console.log(filasCambiadas);
+
+        // Crea una fila de encabezado
+        var headerRow = document.createElement('tr');
+        // Agrega encabezados a cada columna
+        headerRow.innerHTML = `
+        <thead>           
+          <tr>
+            <th>Orden</th>
+            <th>Symbol</th>
+            <th>Type</th>
+            <th>Signal</th>
+            <th>In Progress</th>
+            <th>Ut</th>
+            <th>Operated</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>           
+          
+        `;
+        // Agrega la fila de encabezado a la tabla
+        tableBody.appendChild(headerRow);
+        for (var i = 0; i < response.datos.length; i++) {
+
+          var dato = response.datos[i];
+        
+          
+          //console.log(dato[6]);
+        
+          
+          if ((dato[1] == 'USA' || dato[1] == 'ARG' || dato[1] == 'CEDEAR') && 
+            dato[2] == 'LONG_' || (dato[2] == 'SHORT' && dato[1] != 'ARG' && dato[1] != 'CEDEAR')) {
+            if (dato[3] > '0') {  
+                if (dato[4] == 'OPEN.' || dato[4] == 'closed.') { 
+                    if (dato[4] !== dato[6]) {   
+                    
+                      if (dato[6] !== null) { 
+                       // var campana = document.getElementById('Campana');
+                       // campana.play();
+                        mostrarNotificacion()
+                      }            
+                        var row = document.createElement('tr');
+                        var numeroDeOrden = i + 1; // Empieza desde 1
+                        var filaId = 'fila-' + i;
+                        row.setAttribute('id', filaId);
+                        row.innerHTML = `
+                            <td>${numeroDeOrden}</td>
+                            <td>${dato[0]}</td>
+                            <td>${dato[1]}</td>
+                            <td>${dato[4]}</td>
+                            <td>${dato[2]}</td>
+                            <td>${dato[3]}</td>
+                            <td>${dato[6]}</td>
+                            <td>${dato[5]}</td>
+                            <td>
+                              <div class="form-group">  
+                                <input type="hidden" name="symbol" placeholder="escribe simbolo" value="${dato[0]}" class="form-control">
+                              </div> 
+                              <div class="form-group">                   
+                                <input type="hidden" name="senial" value="{{ senial }}">
+                                <input type="hidden" name="ut" value="{{ ut }}">
+                                <input type="hidden" id="datoValor" class="form-control"> 
+                                ${dato[4] == 'OPEN.' ?  `<button id="boton-despues-carga-tabla" type="button" class="btn btn-success btn-sm btn-block form-control" data-bs-toggle="modal" data-bs-target="#confirmModal" data-senial="${dato[4]}" data-symbol="${dato[0]}"   data-ut="${ dato[3] }">Submit</button>`:''}
+                                ${dato[4] == 'closed.' ? `<button  id="boton-despues-carga-tabla" type="button" class="btn btn-danger btn-sm btn-block form-control" data-bs-toggle="modal" data-bs-target="#confirmModal" data-senial="${ dato[4] }" data-symbol="${ dato[0] }"  data-ut="${ dato[3] }">Submit</button>` : ''}  
+                              </div>                             
+                            </td>
+                        `;
+                        tableBody.appendChild(row);
+                    }
+                }
+            }
+          }
+
+        
+        }
+
+      // Después de actualizar la tabla, puedes comparar los cambios nuevamente
+      document.getElementById('splash').style.display = 'none';
+      document.getElementById('contenido').style.display = 'block';
+      //var cambiosDespues = compararCambios();
+
+    //  var openChanged = cambiosDespues.openBefore - cambiosAntes.openBefore;
+  //   var closedChanged = cambiosDespues.closedBefore - cambiosAntes.closedBefore;
+
+    // console.log('Cambios en estado OPEN:', openChanged);
+    //  console.log('Cambios en estado closed:', closedChanged);
+      // Oculta las filas que no cambiaron
+    
+      } else {
+        // Hubo un error en la solicitud
+        showError('Error al obtener los datos: ' + xhr.statusText);
+      }
+    };
+
+    xhr.onerror = function() {
+      showError('Error de red al intentar obtener los datos');
+    };
+    //console.log('XHR:', xhr);
+    //console.log('URL:', xhr.url);
+    xhr.send();
+  }
+
+  // Llama a la función de actualización inicial/
+  //updateTable();
+
+  // Establece un intervalo para actualizar la tabla cada 5 minutos
+  //setInterval(updateTable, 300000); // 300000 milisegundos = 5 minutos
+  //setInterval(updateTable, 90000); // 90000 milisegundos = 1 minuto 30 segundos
+  setInterval(updateTable, 15000); // 15 segundos
+
+  // Definir la función showError
+  function showError(message) {
+    console.error(message);
+    // Aquí puedes agregar el código para mostrar el error al usuario, como una alerta o una notificación en la página.
+  }
+
+  function compararCambios() {
+    var openBefore = contarElementosOpen();
+    var closedBefore = contarElementosClosed();
+
+
+    return {
+      openBefore: openBefore,
+      closedBefore: closedBefore
+    };
+  }
+
+  function contarElementosOpen() {
+    var openCount = 0;
+    var allTds = document.querySelectorAll('td:nth-child(4)');
+    
+    allTds.forEach(function(td) {
+      if (td.textContent.includes("OPEN.")) {
+        openCount++;
+      }
+    });
+
+    return openCount;
+  }
+  function contarElementosClosed() {
+    var closedCount = 0;
+    var allTds = document.querySelectorAll('td:nth-child(4)');
+    
+    allTds.forEach(function(td) {
+      if (td.textContent.includes("closed.")) {
+        closedCount++;
+      }
+    });
+
+    return closedCount;
+  }
+
+  function obtenerElementos() {
+    var elementosVisibles = [];
+    var filas = document.getElementById('signalTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    
+    for (var i = 0; i < filas.length; i++) {
+      if (filas[i].style.display !== 'none') {
+        elementosVisibles.push(filas[i]);
+      }
+    }
+    console.log('Elementos visibles:', elementosVisibles);
+    return elementosVisibles;
+  }
+
+  function comparaFilas(elementosAntes, response) {
+    var filasCambiadas = [];
+    
+    // Itera sobre los elementos antes de la actualización
+    elementosAntes.forEach(function(filaAntes) {
+      var datoAntes = obtenerDatoDesdeFila(filaAntes);    
+      var idAntes = datoAntes[0]; // Supongo que el primer elemento es un identificador único
+      //debugger;
+      //console.log("idAntes:", idAntes);
+        // Busca el mismo dato en la respuesta
+        var datoDespues = response.datos.find(function(dato) {
+          //console.log("dato[0]:", dato[0]);
+          return dato[1] === idAntes;
+        });
+
+      // Si el dato ha cambiado, añádelo a la lista de filas cambiadas
+      if (datoDespues && datoDespues[4] !== datoAntes[3]) {
+        filasCambiadas.push(datoDespues);
+        console.log("El dato ha cambiado:", datoDespues);
+      }
+    });
+
+    return filasCambiadas;
+  }
+
+
+  function ocultarFilasNoCambiadas(elementosAntes) {
+    var filas = document.getElementById('signalTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+    for (var i = 0; i < filas.length; i++) {
+      // Obtener el dato[3] de la fila actual
+      var dato = obtenerDatoDesdeFila(filas[i]);
+
+      // Verificar si el dato[3] ha cambiado
+      if (!elementosAntes.includes(filas[i]) && dato[3] === '0') {
+        filas[i].style.display = 'none';
+      }
+    }
+  }
+
+
+  function obtenerDatoDesdeFila(fila) {
+    // Obtener los valores de cada celda de la fila
+    
+    var celdas = fila.getElementsByTagName('td');
+    
+    // Crear un array para almacenar los valores
+    var dato = [];
+    for (var j = 0; j < celdas.length; j++) {    
+      dato.push(celdas[j].textContent.trim());    
+    }
+
+    return dato;
+  }
+
+
+
+
+//aqui está el manejo del modal
+
+
+
+
+  
+
+
+  var confirmBtn = document.getElementById('confirmBtn'); // Obtener el botón
+
+
+
+  var cantidadRadio = document.getElementById('Cantidad');
+  var montoRadio = document.getElementById('Monto');
+  var valorCantidadInput = document.getElementById('ValorCantidad');
+  var valorMontoInput = document.getElementById('ValorMonto');
+  var precioMercadoRadio = document.getElementById('PrecioMercado');
+  var precioLimiteRadio = document.getElementById('PrecioLimite');
+  var valorPrecioLimiteInput = document.getElementById('ValorPrecioLimite');
+  var labelPrecioMercado = document.querySelector('label[for="PrecioMercado"]');
+  var labelPrecioLimite = document.querySelector('label[for="PrecioLimite"]');
+
+  cantidadRadio.addEventListener('change', function() {
+      if (this.checked) {
+          valorMontoInput.disabled = true;
+          valorMontoInput.value = '';
+          valorCantidadInput.disabled = false;
+          precioMercadoRadio.disabled = true;
+          precioLimiteRadio.disabled = false;          
+          labelPrecioMercado.style.color = 'gray'; // Deshabilitar color del label
+          labelPrecioLimite.style.color = 'black'; // Habilitar color del label
+          confirmBtn.disabled = false;
+      }
+  });
+
+  montoRadio.addEventListener('change', function() {
+      if (this.checked) {
+          confirmBtn.disabled = false;
+          valorCantidadInput.disabled = true;
+          valorCantidadInput.value = '';
+          valorMontoInput.disabled = false;
+          precioMercadoRadio.disabled = false;
+          precioLimiteRadio.disabled = false;
+          labelPrecioMercado.style.color = 'black'; // Habilitar color del label
+          labelPrecioLimite.style.color = 'black'; // Habilitar color del label
+      }
+  });
+
+  precioMercadoRadio.addEventListener('change', function() {
+      valorPrecioLimiteInput.disabled = true;
+      valorPrecioLimiteInput.value = '';
+  });
+
+  precioLimiteRadio.addEventListener('change', function() {
+      valorPrecioLimiteInput.disabled = false;
+  });
+});
+
+
+
+
+
+
+</script>
+{% endblock%}

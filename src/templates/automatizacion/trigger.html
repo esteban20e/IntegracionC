@@ -1,0 +1,226 @@
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}  
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% extends 'layouts/layout.html' %}
+
+{% block content %}
+
+  
+  <div>
+    <h2>Programar Trigger</h2>
+    <table class="table table-dark table-striped">
+      <thead>           
+        <tr>
+          <th scope="col">IdTrigger</th>  
+          <th scope="col">IdUser</th>
+          <th scope="col">UserCuenta</th>
+          <th scope="col">Cuenta</th>
+          <th scope="col">TiempoInicio</th>
+          <th scope="col">TiempoFin</th>
+          <th scope="col">Automatico</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Acciones</th>
+        </tr>            
+      </thead>
+      <tbody>
+        <!-- Aquí se mostrarán los usuarios -->
+        {% for estrategia in datos %}
+        <tr>
+          <td>{{ estrategia.id }}</td>
+          <td>{{ estrategia.user_id }}</td>          
+          <td>{{ estrategia.userCuenta }}</td>
+          <td>{{ estrategia.accountCuenta }}</td>
+          <td>{{ estrategia.horaInicio }}</td>          
+          <td>{{ estrategia.horaFin }}</td>
+          <td>{{ estrategia.ManualAutomatico }}</td>
+          <td>{{ estrategia.nombreEstrategia }}</td>
+          <td class="d-flex">
+            <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#editarEstrategiaModal" data-trigger-user-id="{{ estrategia.user_id }}" data-trigger-id="{{ estrategia.id }}" data-user-cuenta="{{ estrategia.cuenta }}">Editar</button>
+            <button type="button" class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#eliminarEstrategiaModal" data-user-id="{{ estrategia.user_id }}" data-trigger-id="{{ estrategia.id }}" onclick="setUserData(this.getAttribute('data-user-id'), this.getAttribute('data-trigger-id'))">Eliminar</button>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editarTriggerModal" data-trigger-id="{{ estrategia.id }}">RUN EDIT</button>
+            
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <form id="registro-usuario-form" action="/alta-estrategias-trig" method="POST">
+      <div class="form-group">
+        <input type="hidden" class="form-control" id="usuario_id" name="usuario_id" value="{{ datos.0 }}">
+      </div> 
+      <div class="form-group">
+        <input type="hidden" class="form-control" id="correo_electronico" name="correo_electronico" required>
+      </div>  
+      <div class="form-group">
+        <input type="hidden" class="form-control" id="cuenta" name="cuenta" required>
+      </div>         
+      <label for="nombre">Nombre:</label>
+      <input type="text" class="form-control" id="nombreEstrategia" name="nombreEstrategia" required>         
+      <button type="submit" class="btn btn-primary my-2">Registrar estrategia</button>
+    </form>
+  </div>
+
+  <div class="modal fade" id="editarEstrategiaModal" tabindex="-1" aria-labelledby="editarEstrategiaModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarEstrategiaModal" style="color: black;">Editar Estrategia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="editarEstrategiaModal" action="/editar-trigger-nombre" method="POST">
+          <div class="modal-body">
+            <div class="form-group">
+              <input type="hidden" id="usuario_id" name="usuario_id" value="" />
+            </div>
+            <div class="form-group">
+              <input type="hidden" class="form-control" id="cuenta" name="cuenta">
+            </div>
+            <div class="form-group">
+              <input type="hidden" class="form-control" id="IdTrigger" name="IdTrigger">
+            </div> 
+            <div class="form-group">
+              <label for="editarEstrategiaModal" style="color: black;">Nombre:</label>
+              <input type="text" class="form-control" id="TriggerNombre" name="TriggerNombre" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="eliminarEstrategiaModal" tabindex="-1" aria-labelledby="eliminarEstrategiaModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eliminarEstrategiaModal">Eliminar Estrategia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="eliminarEstrategiaForm" action="/eliminar-trigger" method="POST">
+          <div class="modal-body">
+            <input type="hidden" id="eliminarEstrategiaUserId" name="user_id" value="">
+            <input type="hidden" id="eliminarEstrategiaIdTrigger" name="IdTrigger" value="">
+            <p class="fw-bold text-dark" style="color: black;">¿Está seguro de que desea eliminar esta estrategia?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editarTriggerModal" tabindex="-1" aria-labelledby="editarTriggerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarTriggerModalLabel">Editar Estrategia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="editarTriggerForm" action="/editar-Trigger" method="POST">
+          <div class="modal-body">
+            
+              <label for="horaInicio"  style="color: black;">Hora de inicio:</label>
+              <input type="time" id="horaInicio" name="horaInicio" required>
+            
+            
+              <label for="horaFin" style="color: black;  margin-bottom: 10px;">Hora de finalización:</label>
+              <input type="time" id="horaFin" name="horaFin" required>
+              <input type="hidden" id="editarUsuarioId" name="id">
+                    
+                         
+              <select class="form-control" id="editarManualAutomaticol" name="ManualAutomatico">
+                <option value="MANUAL">Manual</option>
+                <option value="ADAUTOMATICO">Automatico</option>
+              </select>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  
+<!-- Enlaces a scripts de JavaScript -->
+<script>
+  // Retrieve data from localStorage
+  var correo_electronico_estrategia = localStorage.getItem("correo_electronico");
+  var cuenta_estrategia = localStorage.getItem("cuenta");
+
+  // Set values of input elements
+  document.getElementById("correo_electronico").value = correo_electronico_estrategia;
+  document.getElementById("cuenta").value = cuenta_estrategia;
+
+
+  $(document).ready(function() {
+    // Validación del nombre
+    var nombre = document.getElementById("correo_electronico");
+    function validateNombre(event) {
+      if (nombre.value.indexOf(' ') >= 0) {
+        nombre.setCustomValidity("El correo_electronico no debe contener espacios en blanco");
+        event.preventDefault();
+      } else {
+        nombre.setCustomValidity("");
+      }
+    }
+  
+    // Validación de la confirmación de contraseña
+    var password = document.getElementById("password");
+    var confirm_password = document.getElementById("confirm_password");
+  
+    function validatePassword() {
+      if (password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Las contraseñas no coinciden");
+      } else {
+        confirm_password.setCustomValidity("");
+      }
+    }
+  
+    nombre.onchange = validateNombre;
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+  });
+
+  const editButtons = document.querySelectorAll('[data-bs-target="#editarEstrategiaModal"]');
+  editButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const userId = button.dataset.triggerUserId;
+      const Id = button.dataset.triggerId;
+      const cuenta = button.dataset.userCuenta;
+      
+      document.querySelector('#IdTrigger').value = Id;
+      document.querySelector('#usuario_id').value = userId;
+      document.querySelector('#cuenta').value = cuenta;
+    });
+  });
+
+ 
+    function setUserData(userId, triggerId) {
+      document.getElementById('eliminarEstrategiaUserId').value = userId;
+      document.getElementById('eliminarEstrategiaIdTrigger').value = triggerId;
+    }
+ 
+  
+  
+</script>
+{% endblock %}

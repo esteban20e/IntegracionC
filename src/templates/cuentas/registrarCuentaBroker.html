@@ -1,0 +1,143 @@
+{% extends 'layouts/layout.html' %}
+{% block content %}
+<div class="splash-container" id="splash" style="display:none">
+  {% include 'notificaciones/splashPage.html' %}
+</div>
+  
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flash-messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+  
+<body> 
+
+  <div class = 'container p-4' id="contenido">
+    <h1 name = "mensaje" id = "mensaje " >AGREGAR CUENTA PARA LOGEO EN BROKER</h1>
+    <h1 name = "mensaje_correo_electronico" id = "mensaje_correo_electronico" ></h1>
+
+    <div class="row">
+      <div class="col-md-6">
+    
+
+        <!--<meta http-equiv="refresh" content="1;url=http://localhost:5000/cargar" />-->
+        <form name="registrar_cuenta" action="/registrar_cuenta" method="post" class="btn-guardar_inst">
+          <input type="hidden" name="fecha" id="fecha" class="mb-3">
+          <input type="hidden" name="access_token" id="access_token" class="mb-3">
+          <input type="hidden" name="correo_electronico" id="correo_electronico" class="mb-3">
+          <input type="hidden" name="environment" id="environment" class="mb-3"> 
+          <input type="hidden" name="origin_page" value="registrarCuentaBroker" class="mb-3">
+        
+          <input type="text" name="usuario" class="mb-3">  
+          <input type="text" name="contraseña" class="mb-3">
+          <input type="text" name="cuenta" class="mb-3">
+            
+          <select class="form-select mb-3" aria-label="Default select example" name="selctorEnvironment" id="selctorEnvironment">
+            <option selected>Open this select menu</option>
+            <option value="1">Simulacion</option>
+            <option value="2">Produccion</option>     
+          </select>  
+          <div class="col mb-3">           
+            <button type="submit" class="btn btn-primary my-2">Agregar cuenta</button>
+          </div>
+        </form>
+        
+      </div>
+
+      <div class="col-md-6">
+        <form  name="get_cuentas_de_broker_usuario" action="/get_cuentas_de_broker_usuario" method="post" class="btn-guardar_inst">
+          <input type="hidden" name="access_token" id="access_token">
+          <div class="col">  
+              <button type="submit" class="btn btn-secondary my-2">Cuentas existentes</button> 
+          </div>
+        </form>
+        <div class="col">
+          <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalSeleccionPais">Signals</button>
+        </div>
+      </div>  
+    </div>  
+
+
+<!-- Modal para seleccionar el país -->
+<div class="modal fade" id="modalSeleccionPais" tabindex="-1" aria-labelledby="modalSeleccionPais" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Encabezado del modal -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalVacioLabel">Seleccionar País</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- Cuerpo del modal (puedes dejarlo vacío o agregar contenido) -->
+       <!-- Cuerpo del modal (agrega un select para elegir entre Argentina y USA) -->
+       <div class="modal-body">
+        <p>Por favor, selecciona tu país:</p>
+        <select class="form-select mb-3" id="seleccionarPais">
+          <option value="" selected disabled>Select a Country</option> <!-- Opción sin valor por defecto -->
+          <option value="argentina">Argentina</option>
+          <option value="usa">USA</option>
+        </select>
+      </div>
+      <!-- Pie del modal (puedes dejarlo vacío o agregar botones) -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="guardarPais">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+    <script>   
+
+
+
+      document.getElementById('guardarPais').addEventListener('click', function() {
+        document.getElementById('splash').style.display = 'block';
+        document.getElementById('contenido').style.display = 'none';
+        var selectedCountry = document.getElementById('seleccionarPais').value;
+        var usuario_id =localStorage.getItem('usuario_id');
+        localStorage.setItem('paisSeleccionado', selectedCountry);
+        $('#modalSeleccionPais').modal('hide'); // Esta línea cierra el modal
+         // Redirigir a la ruta /panel_control_sin_cuenta
+        layoutOrigen = 'layout'; // Cambia 'nombre_del_layout' por el valor deseado
+        var url = '/panel_control_sin_cuenta?country=' + selectedCountry + '&layoutOrigen=' + layoutOrigen+ '&usuario_id=' + usuario_id;
+        window.location.href = url;
+      });   
+  // en este script cargo el correo electrónico almacenado en el localStorage
+  access_token = localStorage.getItem("access_token");
+  correo_electronico = localStorage.getItem("correo_electronico");
+
+  let enlace_correo = "<a href='mailto:" + correo_electronico + "' style='text-decoration:none'>" + correo_electronico + "</a>";
+  document.getElementById("mensaje_correo_electronico").innerHTML = enlace_correo;
+  document.getElementById("correo_electronico").value = correo_electronico;
+
+  $(document).ready(function() {
+    // Escuchar el evento de cambio en el combobox
+    $("#selctorEnvironment").change(function() {
+      // Obtener el valor seleccionado
+      var selectedValue = $(this).val();
+
+      // Asignar el valor al campo de entrada oculto "environment" en ambos formularios
+      $("input[name='environment']").val(selectedValue);
+    });
+
+    // Asignar el valor del access token al campo oculto en ambos formularios
+    $("input[name='access_token']").val(access_token);
+    $("input[name='access_token_form2']").val(access_token);
+  });
+     
+    </script>
+    
+
+    </div>
+  </div>
+</body>
+
+
+{% endblock%}

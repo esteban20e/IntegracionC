@@ -1,0 +1,156 @@
+/*esto es para el mensaje de carga exitoso*/
+.hidden-message {
+  display: none;
+}
+
+#mensaje-exitoso {
+  color: #28a745; /* Texto blanco */
+  background-color: #000000; /* Fondo verde oscuro (#28a745 es el color verde de Bootstrap) */
+  padding: 10px; /* Agrega un poco de espacio alrededor del texto */
+  border-radius: 5px; /* Bordes redondeados */
+  font-weight: bold; /* Hace que el texto sea negrita */
+}
+
+.custom-file-upload {
+  display: block;
+  width: 100%;
+  height: 400%;
+  padding: 10px;
+  text-align: center;
+  background-color: #a8a8a8;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.custom-file-upload input {
+  display: none;
+}
+
+
+#preview-image {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 300px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    position: relative; /* Para permitir la posición absoluta del botón */
+}
+
+.preview-image-container {
+    position: relative;
+    border: 2px solid black;
+    max-width: 300px;
+    max-height: 300px;
+    overflow: hidden;
+}
+
+
+.preview-image-container img {
+    width: 50%;
+    height: 50%;
+}
+.preview-image-container {
+    max-height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ddd; /* Gris claro */
+    color: black;
+    border: none;
+    width: 20px; /* Ajusta el ancho del botón */
+    height: 20px; /* Ajusta la altura del botón */
+    border-radius: 50%; /* Hace el botón redondo */
+    padding: 8px;
+    cursor: pointer;
+    z-index: 1; /* Asegura que el botón esté adelante de la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: content-box;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-dialog {
+    
+    justify-content: center;
+    align-items: center;
+    height: 500px; /* Cambia el valor de la altura según tus necesidades */
+  }
+
+  .modal-content {
+    background-color: #F0F0F0; /* Utiliza un valor hexadecimal para un gris claro */
+    border: 1px solid #888;
+    padding: 20px;
+    width: 500px;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .modal-title {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    color: black;
+  }
+
+  .modal-body {
+    margin-bottom: 20px;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  #my-dropzone {
+    max-height: 100%;
+    overflow-y: auto;
+    color: black;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  #file-description {
+    border: 0px solid;
+    padding: 1px;
+    width: 100%;
+    resize: both;
+    overflow: auto;
+  }
+
+  /* Aquí se desactiva la parte principal del panel de control de picker */
+  .pcr-color-palette {
+    display: none !important;
+  }
