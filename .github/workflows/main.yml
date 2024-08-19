@@ -41,6 +41,7 @@ jobs:
       run: docker tag proyecto-python:latest "${{ secrets.DOCKER_USERNAME }}/proyecto-python:latest"
 
     - name: Push Docker image to DockerHub
-      run: docker push "${{ secrets.DOCKER_USERNAME }}/proyecto-python:latest"
+      run: docker push "${{ secrets.DOCKER_USERNAME_ }}/proyecto-python:latest"
 
       #git action Estebanvera
+#ahora si
